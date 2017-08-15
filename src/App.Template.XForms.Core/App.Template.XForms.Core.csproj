@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <PackageTargetFallback>portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
@@ -12,7 +12,10 @@
    
   <ItemGroup>
 	<!-- https://bugzilla.xamarin.com/show_bug.cgi?id=55591 -->
+	<Compile Remove="Utils\**" />
+	<EmbeddedResource Remove="Utils\**" />
 	<None Remove="**\*.xaml" />
+	<None Remove="Utils\**" />
 
 	<Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 	<EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />

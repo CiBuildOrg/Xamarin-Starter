@@ -132,6 +132,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>4.6.1</Version>
+    </PackageReference>
     <PackageReference Include="MvvmCross.Plugin.File">
       <Version>5.1.1</Version>
     </PackageReference>

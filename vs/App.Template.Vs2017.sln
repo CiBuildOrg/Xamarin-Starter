@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Template.XForms.Core", "..\src\App.Template.XForms.Core\App.Template.XForms.Core.csproj", "{AFA15B4B-16F7-4F86-B8BF-504D51304E8E}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Template.XForms.iOS", "..\src\App.Template.XForms.iOS\App.Template.XForms.iOS.csproj", "{7CD0F3D2-B00E-460E-8B1A-21EF3EE87DDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Template.Tests", "..\test\App.Template.Tests\App.Template.Tests.csproj", "{EC82ECBB-1352-4815-AFF5-E426BF7684A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DB0E6E61-8393-40D1-B9FD-EADD24DE5A1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,5 +136,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC82ECBB-1352-4815-AFF5-E426BF7684A7} = {DB0E6E61-8393-40D1-B9FD-EADD24DE5A1F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {815CC9A4-AA22-4CF3-B656-F4AFC26E645D}
 	EndGlobalSection
 EndGlobal

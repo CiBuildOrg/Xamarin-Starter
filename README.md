@@ -1,4 +1,4 @@
-# Api boilerplate
+# Xamarin boilerplate 
 
 This will serve as a general base for creating a Xamarin Application in .NET. 
 ## Getting Started

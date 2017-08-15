@@ -112,7 +112,7 @@ If you are building a platform configuration that builds the iOS projects and th
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/CiBuildOrg/Xamarin-Starter/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/CiBuildOrg/Xamarin-Starter/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace App.Template.XForms.Core.Utils.Auth
+namespace App.Template.XForms.Core.Exceptions
 {
     [Serializable]
     public class HttpException : Exception

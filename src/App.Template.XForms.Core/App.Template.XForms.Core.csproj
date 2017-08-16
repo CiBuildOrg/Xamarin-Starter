@@ -30,7 +30,7 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.1" />
     <PackageReference Include="Xamarin.Auth" Version="1.5.0.3" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
-    <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
+    <PackageReference Include="Xamarin.Forms" Version="2.3.4.267" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.2.9" />
   </ItemGroup>
    

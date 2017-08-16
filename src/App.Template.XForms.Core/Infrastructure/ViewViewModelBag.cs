@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.MvvmCross;

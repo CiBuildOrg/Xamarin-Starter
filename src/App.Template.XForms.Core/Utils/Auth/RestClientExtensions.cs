@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using App.Template.XForms.Core.Exceptions;
 using RestSharp.Portable;
 using Validation;
 
@@ -19,7 +20,8 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <param name="request">The request.</param>
         /// <param name="token">The token.</param>
         /// <returns>The asynchronous request task.</returns>
-        public static  Task<IRestResponse> ExecuteAsync(this IRestClient client, IRestRequest request, CancellationToken token)
+        public static Task<IRestResponse> ExecuteAsync(this IRestClient client, IRestRequest request,
+            CancellationToken token)
         {
             Requires.NotNull(client, "client");
             Requires.NotNull(request, "request");
@@ -44,7 +46,8 @@ namespace App.Template.XForms.Core.Utils.Auth
 
                     else if (response.StatusCode == HttpStatusCode.RequestTimeout)
                     {
-                        taskCompletionSource.TrySetException(new HttpException((int)HttpStatusCode.RequestTimeout, "The request was aborted."));
+                        taskCompletionSource.TrySetException(new HttpException((int) HttpStatusCode.RequestTimeout,
+                            "The request was aborted."));
                     }
 
                     else

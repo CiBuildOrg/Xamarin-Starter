@@ -19,7 +19,7 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
         /// </returns>
         /// <exception cref="System.ArgumentNullException">tokensUri</exception>
         /// <exception cref="System.InvalidOperationException">The GetParameters method must not return a null instance.</exception>
-        public RestRequest ToRestRequest(Uri tokensUri)
+        public RestRequest ToRestRequest(string tokensUri)
         {
             Requires.NotNull(tokensUri, "tokensUri");
       

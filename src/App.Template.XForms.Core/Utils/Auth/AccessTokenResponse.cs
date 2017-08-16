@@ -3,8 +3,6 @@ using Validation;
 
 namespace App.Template.XForms.Core.Utils.Auth
 {
-
-
     /// <summary>
     /// This class represents a serialized access token. We use this class to automatically deserialize the 
     /// result of an OAuth token response.
@@ -52,13 +50,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// </value>
         public string Scope { get; set; }
 
-        private DateTime? ExpirationDate
-        {
-            get
-            {
-                return ExpiresIn == null ? (DateTime?)null : DateTime.Now.AddSeconds(Convert.ToInt32(ExpiresIn));
-            }
-        }
+        private DateTime? ExpirationDate => ExpiresIn == null ? (DateTime?)null : DateTime.Now.AddSeconds(Convert.ToInt32(ExpiresIn));
 
         /// <summary>
         /// Convert this instance to a <see cref="Auth.AccessToken"/> instance.

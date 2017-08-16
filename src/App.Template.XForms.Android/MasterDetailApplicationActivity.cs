@@ -33,8 +33,7 @@ namespace App.Template.XForms.Android
             var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
             //var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidPagePresenter;
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidMasterDetailPagePresenter;
-            if (presenter != null)
+            if (Mvx.Resolve<IMvxViewPresenter>() is MvxFormsDroidMasterDetailPagePresenter presenter)
                 presenter.FormsApplication = mvxFormsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();

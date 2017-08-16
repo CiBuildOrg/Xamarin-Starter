@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\DroidModule.cs" />
     <Compile Include="Bootstrap\MethodBindingPluginBootstrap.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="DebugTrace.cs" />
@@ -172,6 +173,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>25.4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.4.7</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.3.4.247</Version>

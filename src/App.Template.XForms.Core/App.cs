@@ -1,14 +1,15 @@
-using App.Template.XForms.Core.ViewModels;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Platform.IoC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using App.Template.XForms.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.MvvmCross;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
 
 namespace App.Template.XForms.Core
 {
@@ -30,6 +31,16 @@ namespace App.Template.XForms.Core
                 if (viewTypes.TryGetValue(viewModelTypeAndName.Key, out Type viewType))
                     viewsContainer.Add(viewModelTypeAndName.Value, viewType);
             }
+            return viewsContainer;
+        }
+
+        public static IMvxViewsContainer LoadViewsContainer(IMvxViewsContainer viewsContainer, IViewViewModelBagService viewViewModelBagService)
+        {
+            foreach (var bag in viewViewModelBagService.GetViewViewModelCorrespondenceMap())
+            {
+                viewsContainer.Add(bag.ViewModel, bag.View);
+            }
+
             return viewsContainer;
         }
 
@@ -59,13 +70,6 @@ namespace App.Template.XForms.Core
                 .Where(t => t.Namespace.EndsWith("Models"))
                 .AsTypes()
                 .RegisterAsDynamic();
-
-            // Override Services registration. Are register as Singletons.
-            Assembly.Load(new AssemblyName(assemblyName)).CreatableTypes()
-                .Where(t => t.Namespace.EndsWith("Services") && t.Name.EndsWith("Service"))
-                .AsInterfaces()
-                .RegisterAsLazySingleton();
         }
-
     }
 }

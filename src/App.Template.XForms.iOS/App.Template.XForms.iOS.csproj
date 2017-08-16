@@ -101,6 +101,7 @@
     </CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\IosModule.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
@@ -142,6 +143,9 @@
     </PackageReference>
     <PackageReference Include="MvvmCross.Plugin.File">
       <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.4.7</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.3.4.247</Version>

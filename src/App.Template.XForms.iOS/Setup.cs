@@ -13,6 +13,12 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Reflection;
+using App.Template.XForms.Core.Bootstrapper;
+using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
+using App.Template.XForms.Core.Contracts;
+using App.Template.XForms.iOS.Bootstrap;
+using Autofac;
+using MvvmCross.Platform.IoC;
 using UIKit;
 using Xamarin.Forms;
 
@@ -33,6 +39,15 @@ namespace App.Template.XForms.iOS
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+
+        protected override IMvxIoCProvider CreateIocProvider()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<FormsPlatformModule>();
+            containerBuilder.RegisterModule<IosModule>();
+
+            return new AutofacMvxIocProvider(containerBuilder.Build());
         }
 
         protected override IMvxIosViewPresenter CreatePresenter()
@@ -73,7 +88,7 @@ namespace App.Template.XForms.iOS
 
         protected sealed override IMvxIosViewsContainer CreateIosViewsContainer()
         {
-            var viewsContainer = Core.App.LoadViewsContainer(base.CreateIosViewsContainer());
+            var viewsContainer = Core.App.LoadViewsContainer(base.CreateIosViewsContainer(), Mvx.Resolve<IViewViewModelBagService>());
             return (IMvxIosViewsContainer) viewsContainer;
         }
     }

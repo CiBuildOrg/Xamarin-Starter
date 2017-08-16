@@ -78,21 +78,21 @@ namespace App.Template.XForms.Core.ViewModels
             UserEmail = "adam@noname.com";
             Menu = new[]
             {
-                new MenuItem()
+                new MenuItem
                 {
                     Text = "First view",
                     Image = "ic_drawer_settings.png",
                     Command = new MvxCommand(ClearStackAndShowViewModel<FirstViewModel>)
                 },
 
-                new MenuItem()
+                new MenuItem
                 {
                     Text = "Second view",
                     Image = "ic_drawer_about.png",
                     Command = new MvxCommand(ClearStackAndShowViewModel<SecondViewModel>)
                 },
 
-                new MenuItem()
+                new MenuItem
                 {
                     Text = "Third view",
                     Image = "ic_power_settings.png",
@@ -109,7 +109,11 @@ namespace App.Template.XForms.Core.ViewModels
         private void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
         {
             var presentationBundle =
-                new MvxBundle(new Dictionary<string, string> {{"NavigationMode", "ClearStack"}});
+                new MvxBundle(new Dictionary<string, string>
+                {
+                    {"NavigationMode", "ClearStack"}
+                });
+
             _navigationService.Navigate<TViewModel>(presentationBundle);
         }
     }

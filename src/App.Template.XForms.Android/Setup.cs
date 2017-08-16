@@ -11,7 +11,12 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Forms.Core;
+using App.Template.XForms.Android.Bootstrap;
+using App.Template.XForms.Core.Bootstrapper;
+using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
+using App.Template.XForms.Core.Contracts;
+using Autofac;
+using MvvmCross.Platform.IoC;
 
 namespace App.Template.XForms.Android
 {
@@ -46,15 +51,27 @@ namespace App.Template.XForms.Android
             get
             {
                 var toReturn =
-                    new List<Assembly>(base.ValueConverterAssemblies) {typeof(MvxLanguageConverter).Assembly};
+                    new List<Assembly>(base.ValueConverterAssemblies)
+                    {
+                        typeof(MvxLanguageConverter).Assembly
+                    };
+
                 return toReturn;
             }
+        }
+
+        protected override IMvxIoCProvider CreateIocProvider()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<FormsPlatformModule>();
+            containerBuilder.RegisterModule<DroidModule>();
+
+            return new AutofacMvxIocProvider(containerBuilder.Build());
         }
 
         protected override void InitializeBindingBuilder()
         {
             var bindingBuilder = CreateBindingBuilder();
-
             RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
         }
@@ -66,9 +83,9 @@ namespace App.Template.XForms.Android
 
         protected override IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
-            var viewsContainer =
-                Core.App.LoadViewsContainer((IMvxViewsContainer) base.CreateViewsContainer(applicationContext));
-            return (IMvxAndroidViewsContainer) viewsContainer;
+            var viewContainerEmpty = (IMvxViewsContainer) base.CreateViewsContainer(applicationContext);
+            var viewsContainerInitialized = Core.App.LoadViewsContainer(viewContainerEmpty, Mvx.Resolve<IViewViewModelBagService>());
+            return (IMvxAndroidViewsContainer) viewsContainerInitialized;
         }
     }
 }

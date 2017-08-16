@@ -41,8 +41,8 @@ namespace App.Template.XForms.iOS
             ImageCircleRenderer.Init();
 
             var xamarinFormsApp = new MvxFormsApplication();
-            var presenter = new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
-            //var presenter = new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
+            //var presenter = new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
+            var presenter = new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             return presenter;
         }

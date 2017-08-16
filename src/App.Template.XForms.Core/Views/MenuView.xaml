@@ -9,12 +9,6 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
     Title="Menu"
     Icon="ic_menu.png">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:DoubleToIntConverter x:Key="doubleToIntConverter"/>
-            <local:DoubleToColorConverter x:Key="doubleToColorConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS" Value="0,20,0,0" />

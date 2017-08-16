@@ -2,6 +2,7 @@
 <views:MvxContentPage
     x:Class="App.Template.XForms.Core.Views.MenuView"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:local="clr-namespace:App.Template.XForms.Core.Fonts"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:icp="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"

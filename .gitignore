@@ -273,3 +273,4 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+/src/App.Template.XForms.Android/App.Template.XForms.Android.csproj.bak

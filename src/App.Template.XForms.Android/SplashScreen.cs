@@ -1,7 +1,10 @@
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
+using MvvmCross.Platform;
 using Xamarin.Forms;
 
 namespace App.Template.XForms.Android
@@ -19,7 +22,7 @@ namespace App.Template.XForms.Android
         {
         }
 
-        private bool _isInitializationComplete = false;
+        private bool _isInitializationComplete;
 
         public override void InitializationComplete()
         {
@@ -32,7 +35,7 @@ namespace App.Template.XForms.Android
         {
             Forms.Init(this, bundle);
             // Leverage controls' StyleId attrib. to Xamarin.UITest
-            Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
+            Forms.ViewInitialized += (sender, e) =>
             {
                 if (!string.IsNullOrWhiteSpace(e.View.StyleId))
                 {
@@ -41,6 +44,8 @@ namespace App.Template.XForms.Android
             };
 
             base.OnCreate(bundle);
+
+            
         }
     }
 }

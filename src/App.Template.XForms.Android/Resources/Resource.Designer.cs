@@ -26,6 +26,7 @@ namespace App.Template.XForms.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::ModernHttpClient.Resource.String.library_name = global::App.Template.XForms.Android.Resource.String.library_name;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::App.Template.XForms.Android.Resource.Attribute.MvxBind;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::App.Template.XForms.Android.Resource.Attribute.MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::App.Template.XForms.Android.Resource.Attribute.MvxGroupItemTemplate;

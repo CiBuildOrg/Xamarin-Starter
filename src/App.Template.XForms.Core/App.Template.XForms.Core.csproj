@@ -12,10 +12,7 @@
    
   <ItemGroup>
 	<!-- https://bugzilla.xamarin.com/show_bug.cgi?id=55591 -->
-	<Compile Remove="Utils\**" />
-	<EmbeddedResource Remove="Utils\**" />
 	<None Remove="**\*.xaml" />
-	<None Remove="Utils\**" />
 
 	<Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 	<EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
@@ -23,12 +20,15 @@
    
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Cheesebaron.MvxPlugins.SimpleWebToken" Version="3.1.0" />
+    <PackageReference Include="FubarCoder.RestSharp.Portable" Version="3.3.0" />
     <PackageReference Include="modernhttpclient" Version="2.4.2" />
     <PackageReference Include="MvvmCross.Forms" Version="5.1.1" />
     <PackageReference Include="MvvmCross.Plugin.MethodBinding" Version="5.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Validation" Version="2.4.15" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.1" />
+    <PackageReference Include="Xamarin.Auth" Version="1.5.0.3" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.2.9" />

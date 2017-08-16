@@ -261,8 +261,7 @@ namespace App.Template.XForms.Core.Autofac
             }
 
             var service = new TypedService(type);
-            IComponentRegistration registration;
-            if (!Container.ComponentRegistry.TryGetRegistration(service, out registration))
+            if (!Container.ComponentRegistry.TryGetRegistration(service, out IComponentRegistration registration))
             {
                 throw new ComponentNotRegisteredException(service);
             }

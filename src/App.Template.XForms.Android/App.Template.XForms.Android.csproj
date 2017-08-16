@@ -71,6 +71,9 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MasterDetailApplicationActivity.cs" />
+    <Compile Include="Renderers\ButtonTypefaceRenderer.cs" />
+    <Compile Include="Renderers\FontUtils.cs" />
+    <Compile Include="Renderers\LabelTypefaceRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />

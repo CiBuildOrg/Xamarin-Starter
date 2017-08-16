@@ -107,6 +107,9 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Bootstrap\MethodBindingPluginBootstrap.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Ui\FaButton.cs" />
+    <Compile Include="Ui\FontAwesomeHelper.cs" />
+    <Compile Include="Ui\FaBarButtonItem.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />

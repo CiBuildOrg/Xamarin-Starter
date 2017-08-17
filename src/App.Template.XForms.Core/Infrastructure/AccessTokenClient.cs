@@ -7,8 +7,10 @@ using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Exceptions;
 using App.Template.XForms.Core.Utils.Auth;
 using App.Template.XForms.Core.Utils.Auth.Requests;
+using RestSharp.Portable;
 using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
+using RestSharp.Portable.Serializers;
 using Validation;
 
 namespace App.Template.XForms.Core.Infrastructure
@@ -145,6 +147,42 @@ namespace App.Template.XForms.Core.Infrastructure
                 new RefreshAccessTokenRequest(refreshToken, _serverConfiguration.ClientId,
                     _serverConfiguration.ClientSecret), cancellationToken);
         }
+
+        // might not work?
+        //public Task<T> ExecutePostAsync<T, TK>(TK request, CancellationToken cancellationToken)
+        //{
+            
+        //    var restClient = new RestClient
+        //    {
+        //        BaseUrl =new Uri("http://///....")
+        //    };
+
+        //    var clientRequest = new RestRequest
+        //    {
+        //        Method = Method.POST,
+        //    };
+
+        //    clientRequest.AddHeader("Content-Type", "application/json");
+        //    clientRequest.Serializer = new JsonSerializer
+        //    {
+        //        ContentType = "application/json"
+        //    };
+
+        //    clientRequest.AddBody(request);
+        //    return restClient.ExecuteAsync(clientRequest, cancellationToken)
+        //        .ContinueWith(t =>
+        //        {
+        //            // We will only process HTTP 200 status codes, as only then we can be sure 
+        //            // that we have received a correct response and can be try to deserialize
+        //            // the access token response
+        //            if (t.Result.StatusCode == HttpStatusCode.OK)
+        //            {
+        //                return _jsonDeserializer.Deserialize<T>(t.Result);
+        //            }
+
+        //            throw new HttpException((int)t.Result.StatusCode, t.Result.StatusDescription);
+        //        }, cancellationToken);
+        //}
 
         private Task<AccessToken> ExecuteAccessTokenRequest(TokenRequest tokenRequest,
             CancellationToken cancellationToken)

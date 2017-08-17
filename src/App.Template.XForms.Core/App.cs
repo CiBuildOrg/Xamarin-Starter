@@ -34,7 +34,7 @@ namespace App.Template.XForms.Core
             return viewsContainer;
         }
 
-        public static IMvxViewsContainer LoadViewsContainer(IMvxViewsContainer viewsContainer, IViewViewModelBagService viewViewModelBagService)
+        public static IMvxViewsContainer LoadViewsContainer(IMvxViewsContainer viewsContainer, IMvxViewsContainerHelper viewViewModelBagService)
         {
             foreach (var bag in viewViewModelBagService.GetViewViewModelCorrespondenceMap())
             {

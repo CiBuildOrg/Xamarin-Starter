@@ -2,7 +2,7 @@
 
 namespace App.Template.XForms.Core.Contracts
 {
-    public interface IViewViewModelBagService
+    public interface IMvxViewsContainerHelper
     {
         List<ViewModelViewBagItem> GetViewViewModelCorrespondenceMap();
     }

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace App.Template.XForms.Core.Views
 {
@@ -8,6 +9,7 @@ namespace App.Template.XForms.Core.Views
         public HomeView()
         {
             InitializeComponent();
+            
         }
     }
 }

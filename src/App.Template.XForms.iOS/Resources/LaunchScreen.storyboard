@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="img_splash_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" preservesSuperviewLayoutMargins="YES" fixedFrame="YES">
-                                <rect key="frame" x="105" y="314" width="198" height="172"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="img_splash_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" preservesSuperviewLayoutMargins="YES">
+                                <rect key="frame" x="61" y="97" width="198" height="172"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 <constraints>
                                     <constraint id="52" firstAttribute="width" constant="198"/>
@@ -78,4 +78,7 @@
         <image name="img_profile_generic.png" width="256" height="256"/>
         <image name="img_splash_logo.png" width="638" height="359"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

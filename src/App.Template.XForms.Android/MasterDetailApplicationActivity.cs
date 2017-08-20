@@ -1,7 +1,10 @@
-﻿using Android.App;
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using App.Template.XForms.Core.ViewModels;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
@@ -22,7 +25,7 @@ namespace App.Template.XForms.Android
         {
             TabLayoutResource = Resource.Layout.tabbar;
             ToolbarResource = Resource.Layout.toolbar;
-
+            
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
             MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext).EnsureInitialized();
@@ -30,12 +33,29 @@ namespace App.Template.XForms.Android
             var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
             if (Mvx.Resolve<IMvxViewPresenter>() is MvxFormsDroidMasterDetailPagePresenter presenter)
+            {
                 presenter.FormsApplication = mvxFormsApp;
+            }
 
             Mvx.Resolve<IMvxAppStart>().Start();
+
+            ClearStackAndShowViewModel<FirstViewModel>();
+
             _lifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
             _lifetimeListener.OnCreate(this);
         }
+
+        private static void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            var presentationBundle =
+                new MvxBundle(new Dictionary<string, string>
+                {
+                    {"NavigationMode", "ClearStack"}
+                });
+
+            Mvx.Resolve<IMvxNavigationService>().Navigate<TViewModel>(presentationBundle);
+        }
+
 
         protected override void OnDestroy()
         {

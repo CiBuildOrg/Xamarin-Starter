@@ -15,7 +15,9 @@ using App.Template.XForms.Android.Bootstrap;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
+using App.Template.XForms.Core.ViewModels;
 using Autofac;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Platform.IoC;
 
@@ -51,6 +53,7 @@ namespace App.Template.XForms.Android
             return presenter;
         }
 
+        
         protected override IEnumerable<Assembly> ValueConverterAssemblies
         {
             get

@@ -16,6 +16,7 @@ using System.Reflection;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
+using App.Template.XForms.Core.ViewModels;
 using App.Template.XForms.iOS.Bootstrap;
 using Autofac;
 using MvvmCross.Platform.IoC;
@@ -58,6 +59,7 @@ namespace App.Template.XForms.iOS
             var xamarinFormsApp = new MvxFormsApplication();
             //var presenter = new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
             var presenter = new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
+
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             return presenter;
         }

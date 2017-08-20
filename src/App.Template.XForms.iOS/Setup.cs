@@ -62,7 +62,6 @@ namespace App.Template.XForms.iOS
             return presenter;
         }
 
-
         protected override IEnumerable<Assembly> ValueConverterAssemblies
         {
             get
@@ -88,7 +87,9 @@ namespace App.Template.XForms.iOS
 
         protected sealed override IMvxIosViewsContainer CreateIosViewsContainer()
         {
-            var viewsContainer = Core.App.LoadViewsContainer(base.CreateIosViewsContainer(), Mvx.Resolve<IViewViewModelBagService>());
+            var viewsContainer = Core.App.LoadViewsContainer(base.CreateIosViewsContainer(), 
+                Mvx.Resolve<IViewViewModelBagService>());
+
             return (IMvxIosViewsContainer) viewsContainer;
         }
     }

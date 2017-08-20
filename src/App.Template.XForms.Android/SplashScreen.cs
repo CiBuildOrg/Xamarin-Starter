@@ -1,10 +1,7 @@
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
 using Xamarin.Forms;
 
 namespace App.Template.XForms.Android
@@ -23,7 +20,6 @@ namespace App.Template.XForms.Android
         }
 
         private bool _isInitializationComplete;
-
         public override void InitializationComplete()
         {
             if (_isInitializationComplete) return;
@@ -44,8 +40,6 @@ namespace App.Template.XForms.Android
             };
 
             base.OnCreate(bundle);
-
-            
         }
     }
 }

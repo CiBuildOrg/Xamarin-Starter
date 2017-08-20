@@ -16,6 +16,7 @@ using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
 using Autofac;
+using MvvmCross.Forms.Core;
 using MvvmCross.Platform.IoC;
 
 namespace App.Template.XForms.Android
@@ -37,10 +38,16 @@ namespace App.Template.XForms.Android
             return new DebugTrace();
         }
 
+        protected override void InitializeDebugServices()
+        {
+            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
+            base.InitializeDebugServices();
+        }
+
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             //var presenter = new MvxFormsDroidPagePresenter();
-            var presenter = new MvxFormsDroidMasterDetailPagePresenter();
+            var presenter = new MvxFormsDroidMasterDetailPagePresenter(new MvxFormsApplication());
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

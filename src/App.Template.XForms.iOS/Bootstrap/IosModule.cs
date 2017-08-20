@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using App.Template.XForms.iOS.Infrastructure.Interaction;
+using Autofac;
 
 namespace App.Template.XForms.iOS.Bootstrap
 {
@@ -7,6 +8,7 @@ namespace App.Template.XForms.iOS.Bootstrap
         protected override void Load(ContainerBuilder builder)
         {
             // do all IOS registrations here
+            builder.Register(x => InteractiveAlerts.Instance).SingleInstance();
         }
     }
 }

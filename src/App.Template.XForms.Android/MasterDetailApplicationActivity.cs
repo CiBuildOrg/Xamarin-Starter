@@ -3,6 +3,8 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using App.Template.XForms.Android.Infrastructure.Interaction;
+using App.Template.XForms.Core.Utils.Interaction;
 using App.Template.XForms.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -29,7 +31,9 @@ namespace App.Template.XForms.Android
             base.OnCreate(bundle);
             Forms.Init(this, bundle);
             MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext).EnsureInitialized();
+            InteractiveAlerts.Init(() => this);
 
+            Mvx.RegisterSingleton(InteractiveAlerts.Instance);
             var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
             if (Mvx.Resolve<IMvxViewPresenter>() is MvxFormsDroidMasterDetailPagePresenter presenter)

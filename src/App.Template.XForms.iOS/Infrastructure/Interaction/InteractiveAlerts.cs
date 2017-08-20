@@ -9,5 +9,5 @@ namespace App.Template.XForms.iOS.Infrastructure.Interaction
             new Lazy<IInteractiveAlerts>(() => new InteractiveAlertsImpl());
 
         public static IInteractiveAlerts Instance => InstanceLazy.Value;
-    }
+    }\
 }

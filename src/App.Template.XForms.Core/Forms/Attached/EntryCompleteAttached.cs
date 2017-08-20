@@ -31,8 +31,7 @@ namespace App.Template.XForms.Core.Forms.Attached
         {
             bindable.SetValue(CommandProperty, value);
         }
-
-        public static ICommand GetItemTapped(BindableObject bindable)
+public static ICommand GetItemTapped(BindableObject bindable)
         {
             return (ICommand)bindable.GetValue(CommandProperty);
         }

@@ -14,7 +14,7 @@ namespace App.Template.XForms.iOS
 {
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
-    [Preserve(AllMembers = true)]
+    [Xamarin.Forms.Internals.Preserve(AllMembers = true)]
     [SuppressMessage("ReSharper", "UnusedParameter.Global")]
     [SuppressMessage("ReSharper", "RedundantAssignment")]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]

@@ -71,7 +71,9 @@ namespace App.Template.XForms.Android
             containerBuilder.RegisterModule<FormsPlatformModule>();
             containerBuilder.RegisterModule<DroidModule>();
 
-            return new AutofacMvxIocProvider(containerBuilder.Build());
+            var containerBuilt = containerBuilder.Build();
+
+            return new AutofacMvxIocProvider(containerBuilt);
         }
 
         protected override void InitializeBindingBuilder()
@@ -81,7 +83,7 @@ namespace App.Template.XForms.Android
             bindingBuilder.DoRegistration();
         }
 
-        private new MvxBindingBuilder CreateBindingBuilder()
+        private new static MvxBindingBuilder CreateBindingBuilder()
         {
             return new MvxFormsBindingBuilder();
         }

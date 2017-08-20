@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Core;
 
 namespace App.Template.XForms.Core.ViewModels
 {

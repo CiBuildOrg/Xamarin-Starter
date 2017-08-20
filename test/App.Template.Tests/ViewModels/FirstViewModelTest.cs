@@ -1,5 +1,4 @@
 using App.Template.Tests.Base;
-using App.Template.XForms.Core.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

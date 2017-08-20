@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Presenters;
 

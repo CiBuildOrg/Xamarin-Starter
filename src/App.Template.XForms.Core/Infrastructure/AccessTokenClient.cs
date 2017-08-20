@@ -7,10 +7,8 @@ using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Exceptions;
 using App.Template.XForms.Core.Utils.Auth;
 using App.Template.XForms.Core.Utils.Auth.Requests;
-using RestSharp.Portable;
 using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.HttpClient;
-using RestSharp.Portable.Serializers;
 using Validation;
 
 namespace App.Template.XForms.Core.Infrastructure

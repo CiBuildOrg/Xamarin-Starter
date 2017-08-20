@@ -1,5 +1,4 @@
-﻿using System;
-using RestSharp.Portable;
+﻿using RestSharp.Portable;
 using Validation;
 
 namespace App.Template.XForms.Core.Utils.Auth.Requests

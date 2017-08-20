@@ -6,7 +6,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
 using Xamarin.Forms;

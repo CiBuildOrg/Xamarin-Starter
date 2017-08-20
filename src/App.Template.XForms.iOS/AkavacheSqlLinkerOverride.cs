@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Akavache.Sqlite3;
-using Foundation;
-using UIKit;
 
 namespace App.Template.XForms.iOS
 {

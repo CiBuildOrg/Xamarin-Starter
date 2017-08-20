@@ -88,7 +88,7 @@ namespace App.Template.XForms.iOS
         protected sealed override IMvxIosViewsContainer CreateIosViewsContainer()
         {
             var viewsContainer = Core.App.LoadViewsContainer(base.CreateIosViewsContainer(), 
-                Mvx.Resolve<IViewViewModelBagService>());
+                Mvx.Resolve<IMvxViewsContainerHelper>());
 
             return (IMvxIosViewsContainer) viewsContainer;
         }

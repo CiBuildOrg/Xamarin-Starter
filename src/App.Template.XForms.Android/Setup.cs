@@ -46,10 +46,8 @@ namespace App.Template.XForms.Android
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            //var presenter = new MvxFormsDroidPagePresenter();
             var presenter = new MvxFormsDroidMasterDetailPagePresenter(new MvxFormsApplication());
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
-
             return presenter;
         }
 
@@ -90,9 +88,11 @@ namespace App.Template.XForms.Android
 
         protected override IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
+            var viewsContainerHelper = Mvx.Resolve<IMvxViewsContainerHelper>();
+
             var viewContainerEmpty = (IMvxViewsContainer) base.CreateViewsContainer(applicationContext);
             var viewsContainerInitialized = Core.App.LoadViewsContainer(viewContainerEmpty, 
-                Mvx.Resolve<IMvxViewsContainerHelper>());
+                viewsContainerHelper);
 
             return (IMvxAndroidViewsContainer) viewsContainerInitialized;
         }

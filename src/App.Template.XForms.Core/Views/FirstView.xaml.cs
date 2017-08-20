@@ -10,6 +10,7 @@ namespace App.Template.XForms.Core.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }

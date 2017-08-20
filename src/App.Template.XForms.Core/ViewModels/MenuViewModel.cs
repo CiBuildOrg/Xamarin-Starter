@@ -5,6 +5,7 @@ using MvvmCross.Forms.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
+using App.Template.XForms.Core.Contracts;
 
 namespace App.Template.XForms.Core.ViewModels
 {
@@ -71,34 +72,12 @@ namespace App.Template.XForms.Core.ViewModels
 
         #endregion Properties
 
-        public MenuViewModel(IMvxNavigationService navigationService)
+        public MenuViewModel(IMvxNavigationService navigationService, IMenuService menuService)
         {
             _navigationService = navigationService;
             UserFullName = "Adam";
             UserEmail = "adam@noname.com";
-            Menu = new[]
-            {
-                new MenuItem
-                {
-                    Text = "First view",
-                    Image = "ic_drawer_settings.png",
-                    Command = new MvxCommand(ClearStackAndShowViewModel<FirstViewModel>)
-                },
-
-                new MenuItem
-                {
-                    Text = "Second view",
-                    Image = "ic_drawer_about.png",
-                    Command = new MvxCommand(ClearStackAndShowViewModel<SecondViewModel>)
-                },
-
-                new MenuItem
-                {
-                    Text = "Third view",
-                    Image = "ic_power_settings.png",
-                    Command = new MvxCommand(ClearStackAndShowViewModel<ThirdViewModel>)
-                }
-            };
+            Menu = menuService.GetMenuItems();
         }
 
         public override void RootContentPageActivated()

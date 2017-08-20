@@ -8,7 +8,7 @@ using MvvmCross.Platform.IoC;
 
 namespace App.Template.XForms.Core.Infrastructure
 {
-    public class ViewViewModelBagService : IViewViewModelBagService
+    public class MvxViewsContainerHelper : IMvxViewsContainerHelper
     {
         private static Dictionary<string, Type> GetTypesInThisAssembly(string typeSuffix)
         {

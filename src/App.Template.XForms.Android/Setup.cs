@@ -91,7 +91,7 @@ namespace App.Template.XForms.Android
         protected override IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
         {
             var viewContainerEmpty = (IMvxViewsContainer) base.CreateViewsContainer(applicationContext);
-            var viewsContainerInitialized = Core.App.LoadViewsContainer(viewContainerEmpty, Mvx.Resolve<IViewViewModelBagService>());
+            var viewsContainerInitialized = Core.App.LoadViewsContainer(viewContainerEmpty, Mvx.Resolve<IMvxViewsContainerHelper>());
             return (IMvxAndroidViewsContainer) viewsContainerInitialized;
         }
     }

@@ -25,14 +25,11 @@ namespace App.Template.XForms.Android
             ToolbarResource = Resource.Layout.toolbar;
 
             base.OnCreate(bundle);
-
             Forms.Init(this, bundle);
-
             MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext).EnsureInitialized();
 
             var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
-            //var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidPagePresenter;
             if (Mvx.Resolve<IMvxViewPresenter>() is MvxFormsDroidMasterDetailPagePresenter presenter)
                 presenter.FormsApplication = mvxFormsApp;
 

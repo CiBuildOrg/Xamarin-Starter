@@ -50,6 +50,7 @@ namespace App.Template.XForms.Android
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::App.Template.XForms.Android.Resource.Styleable.MvxListView_MvxItemTemplate;
 			global::PCLCrypto.Resource.String.ApplicationName = global::App.Template.XForms.Android.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::App.Template.XForms.Android.Resource.String.Hello;
+			global::Splat.Resource.String.library_name = global::App.Template.XForms.Android.Resource.String.library_name;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::App.Template.XForms.Android.Resource.Animation.slide_in_right;
 			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::App.Template.XForms.Android.Resource.Animation.slide_out_left;
 			global::Xamarin.Auth.Resource.Drawable.ic_arrow_back = global::App.Template.XForms.Android.Resource.Drawable.ic_arrow_back;

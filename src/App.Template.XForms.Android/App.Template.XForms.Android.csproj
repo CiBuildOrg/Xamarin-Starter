@@ -68,7 +68,6 @@
     <Compile Include="AkavacheSqlLinkerOverride.cs" />
     <Compile Include="Bootstrap\DroidModule.cs" />
     <Compile Include="Bootstrap\MethodBindingPluginBootstrap.cs" />
-    <Compile Include="CoreModule.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MainApplication.cs" />

@@ -61,10 +61,11 @@ namespace App.Template.XForms.Core.ViewModels
             get
             {
                 return _onSelectedMenuItemChangedCommand ?? (_onSelectedMenuItemChangedCommand =
-                           new MvxCommand<MenuItem>((item) =>
+                           new MvxCommand<MenuItem>(item =>
                            {
                                if (item == null)
                                    return;
+
                                item.Command.Execute();
                            }));
             }
@@ -83,17 +84,6 @@ namespace App.Template.XForms.Core.ViewModels
         public override void RootContentPageActivated()
         {
             SelectedMenuItem = null;
-        }
-
-        private void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            var presentationBundle =
-                new MvxBundle(new Dictionary<string, string>
-                {
-                    {"NavigationMode", "ClearStack"}
-                });
-
-            _navigationService.Navigate<TViewModel>(presentationBundle);
         }
     }
 }

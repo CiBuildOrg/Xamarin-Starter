@@ -17,8 +17,7 @@ namespace App.Template.XForms.Core.Forms.Attached
 
         public static void OnItemTappedChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = bindable as ListView;
-            if (control != null)
+            if (bindable is ListView control)
                 control.ItemTapped += OnItemTapped;
         }
 

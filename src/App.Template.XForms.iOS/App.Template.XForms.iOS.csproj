@@ -104,6 +104,12 @@
     <Compile Include="AkavacheSqlLinkerOverride.cs" />
     <Compile Include="Bootstrap\IosModule.cs" />
     <Compile Include="DebugTrace.cs" />
+    <Compile Include="Infrastructure\Interaction\InteractiveAlerts.cs" />
+    <Compile Include="Infrastructure\Interaction\InteractiveAlertsImpl.cs" />
+    <Compile Include="Infrastructure\Interaction\InteractiveAlertView.cs" />
+    <Compile Include="Infrastructure\Interaction\SclActionType.cs" />
+    <Compile Include="Infrastructure\Interaction\SclAnimationStyle.cs" />
+    <Compile Include="Infrastructure\Interaction\SclAlertViewResponder.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -345,9 +351,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>

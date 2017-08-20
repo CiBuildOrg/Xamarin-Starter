@@ -17,8 +17,7 @@ namespace App.Template.XForms.Core.Forms.Attached
 
         private static void OnEntryComplete(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var control = bindable as Entry;
-            if (control != null)
+            if (bindable is Entry control)
                 control.Completed += (sender, args) =>
                 {
                     var entry = sender as Entry;

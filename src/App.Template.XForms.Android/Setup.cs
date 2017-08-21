@@ -17,7 +17,6 @@ using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.ViewModels;
 using Autofac;
-using MvvmCross.Core.Navigation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Platform.IoC;
 
@@ -32,7 +31,7 @@ namespace App.Template.XForms.Android
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new Core.App(Mvx.Resolve<IAppSettings>());
         }
         
         protected override IMvxTrace CreateDebugTrace()

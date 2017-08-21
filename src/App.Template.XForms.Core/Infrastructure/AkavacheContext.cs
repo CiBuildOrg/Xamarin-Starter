@@ -16,9 +16,9 @@ namespace App.Template.XForms.Core.Infrastructure
     {
         private readonly IBlobCache _blobCache;
 
-        public AkavacheContext()
+        public AkavacheContext(IServiceSettings serviceSettings)
         {
-            BlobCache.ApplicationName = "???";
+            BlobCache.ApplicationName = serviceSettings.ServiceId;
             BlobCache.EnsureInitialized();
 
             _blobCache = BlobCache.UserAccount;

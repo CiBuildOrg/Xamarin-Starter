@@ -19,6 +19,16 @@
   </ItemGroup>
    
   <ItemGroup>
+    <None Remove="Resources\appsettings.Development.json" />
+    <None Remove="Resources\appsettings.json" />
+  </ItemGroup>
+   
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\appsettings.Development.json" />
+    <EmbeddedResource Include="Resources\appsettings.json" />
+  </ItemGroup>
+   
+  <ItemGroup>
     <PackageReference Include="akavache" Version="5.0.0" />
     <PackageReference Include="akavache.sqlite3" Version="5.0.0" />
     <PackageReference Include="Autofac" Version="4.6.1" />

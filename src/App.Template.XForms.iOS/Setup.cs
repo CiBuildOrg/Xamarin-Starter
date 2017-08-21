@@ -34,7 +34,7 @@ namespace App.Template.XForms.iOS
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new Core.App(Mvx.Resolve<IAppSettings>());
         }
 
         protected override IMvxTrace CreateDebugTrace()

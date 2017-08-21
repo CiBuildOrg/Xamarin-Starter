@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Validation;
 
@@ -8,6 +9,7 @@ namespace App.Template.XForms.Core.Utils.Auth
     /// <summary>
     /// An OAuth access token.
     /// </summary>
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class AccessToken
     {
         private const string TokenKey = "Token";
@@ -15,18 +17,6 @@ namespace App.Template.XForms.Core.Utils.Auth
         private const string ScopeKey = "Scope";
         private const string TokenTypeKey = "TokenType";
         private const string ExpirationDateKey = "ExpirationDate";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AccessToken"/> class.
-        /// </summary>
-        /// <param name="token">The token.</param>
-        /// <param name="tokenType">Type of the token.</param>
-        /// <param name="scope">The scope.</param>
-        /// <param name="expirationDate">The expiration date.</param>
-        public AccessToken(string token, string tokenType, string scope, DateTime? expirationDate)
-            : this(token, tokenType, scope, expirationDate, null)
-        {
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccessToken" /> class.
@@ -43,7 +33,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// or
         /// tokenType
         /// </exception>
-        public AccessToken(string token, string tokenType, string scope, DateTime? expirationDate, string refreshToken)
+        public AccessToken(string token, string tokenType, string scope, DateTime? expirationDate, string refreshToken = null)
         {
             Requires.NotNullOrEmpty(token, "token");
             Requires.NotNullOrEmpty(tokenType, "tokenType");
@@ -81,7 +71,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <value>
         /// The token.
         /// </value>
-        public string Token { get; private set; }
+        public string Token { get; }
 
         /// <summary>
         /// Gets the scope.
@@ -89,7 +79,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <value>
         /// The scope.
         /// </value>
-        public string Scope { get; private set; }
+        public string Scope { get; }
 
         /// <summary>
         /// Gets the type of the token.
@@ -97,7 +87,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <value>
         /// The type of the token.
         /// </value>
-        public string TokenType { get; private set; }
+        public string TokenType { get; }
 
         /// <summary>
         /// Gets the expiration date.
@@ -105,7 +95,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <value>
         /// The expiration date.
         /// </value>
-        public DateTime? ExpirationDate { get; private set; }
+        public DateTime? ExpirationDate { get; }
 
         /// <summary>
         /// Gets the refresh token.
@@ -113,7 +103,7 @@ namespace App.Template.XForms.Core.Utils.Auth
         /// <value>
         /// The refresh token.
         /// </value>
-        public string RefreshToken { get; private set; }
+        public string RefreshToken { get; }
 
         /// <summary>
         /// Check if the access token should be refreshed when taking into account the specified refresh token expiration window.
@@ -141,7 +131,7 @@ namespace App.Template.XForms.Core.Utils.Auth
                                      { TokenKey, Token },
                                      { TokenTypeKey, TokenType },
                                      { ScopeKey, Scope },
-                                     { ExpirationDateKey, ExpirationDate.HasValue ? ExpirationDate.Value.ToString("s") : null },
+                                     { ExpirationDateKey, ExpirationDate?.ToString("s") },
                                      { RefreshTokenKey, RefreshToken }
                                  };
 

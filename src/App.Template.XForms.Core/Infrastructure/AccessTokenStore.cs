@@ -68,7 +68,6 @@ namespace App.Template.XForms.Core.Infrastructure
         {
             Requires.NotNullOrEmpty(clientId, "clientId");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
-
             return GetAccessToken(NormalizeClientId(clientId), serviceId, cancellationToken);
         }
 
@@ -86,7 +85,6 @@ namespace App.Template.XForms.Core.Infrastructure
             Requires.NotNullOrEmpty(username, "username");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
             Requires.NotNull(accessToken, "accessToken");
-
             return SaveAccessToken(NormalizeUsername(username), serviceId, accessToken, cancellationToken);
         }
 
@@ -113,10 +111,9 @@ namespace App.Template.XForms.Core.Infrastructure
         {
             return Task.Factory.StartNew(() =>
             {
-                var account = _accountStore.FindAccountsForService(serviceId).First(a => string.Equals(a.Username, normalizedUsername,
+                var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
                         StringComparison.CurrentCultureIgnoreCase));
-
-                return new AccessToken(account.Properties);
+                return account == null ? null : new AccessToken(account.Properties);
             }, cancellationToken);
         }
 

@@ -27,6 +27,7 @@ namespace App.Template.XForms.Core.Bootstrapper
             builder.RegisterType<AccessTokenClient>().As<IAccessTokenClient>().SingleInstance();
             builder.RegisterType<AccessTokenStore>().As<IAccessTokenStore>().SingleInstance();
             builder.RegisterType<MvxViewsContainerHelper>().As<IMvxViewsContainerHelper>().SingleInstance();
+            builder.RegisterType<AkavacheContext>().As<IKeyValueStore>().SingleInstance();
         }
     }
 }

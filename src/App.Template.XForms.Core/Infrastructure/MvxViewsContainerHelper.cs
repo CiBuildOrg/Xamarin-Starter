@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Contracts;
@@ -8,6 +9,7 @@ using MvvmCross.Platform.IoC;
 
 namespace App.Template.XForms.Core.Infrastructure
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class MvxViewsContainerHelper : IMvxViewsContainerHelper
     {
         private static Dictionary<string, Type> GetTypesInThisAssembly(string typeSuffix)
@@ -39,4 +41,5 @@ namespace App.Template.XForms.Core.Infrastructure
             return result;
         }
     }
+
 }

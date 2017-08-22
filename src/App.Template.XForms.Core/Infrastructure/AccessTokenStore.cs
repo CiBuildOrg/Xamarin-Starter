@@ -51,6 +51,17 @@ namespace App.Template.XForms.Core.Infrastructure
             return GetAccessToken(NormalizeUsername(username), serviceId, cancellationToken);
         }
 
+        public Task<bool> HasAccessToken(string clientId, string serviceId, CancellationToken cancellationToken)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var normalizedUsername = NormalizeClientId(clientId);
+                var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
+                    StringComparison.CurrentCultureIgnoreCase));
+                return account != null;
+            }, cancellationToken);
+        }
+
         /// <summary>
         /// Gets the client access token.
         /// </summary>
@@ -121,7 +132,17 @@ namespace App.Template.XForms.Core.Infrastructure
             CancellationToken cancellationToken)
         {
             return Task.Factory.StartNew(
-                () => _accountStore.Save(new Account(normalizedUsername, accessToken.ToDictionary()), serviceId),
+                () =>
+                {
+                    var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
+                        StringComparison.CurrentCultureIgnoreCase));
+
+                    if (account != null)
+                    {
+                        _accountStore.Delete(account, serviceId);
+                    }
+                    _accountStore.Save(new Account(normalizedUsername, accessToken.ToDictionary()), serviceId);
+                },
                 cancellationToken);
         }
 

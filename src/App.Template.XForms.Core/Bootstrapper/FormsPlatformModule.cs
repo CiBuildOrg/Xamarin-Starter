@@ -2,6 +2,7 @@
 using System.Reflection;
 using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Infrastructure;
+using App.Template.XForms.Core.Infrastructure.Services;
 using App.Template.XForms.Core.MvvmCross;
 using App.Template.XForms.Core.Options;
 using Autofac;
@@ -31,6 +32,8 @@ namespace App.Template.XForms.Core.Bootstrapper
             builder.RegisterType<ServiceSettings>().As<IServiceSettings>().SingleInstance();
             builder.RegisterType<AppSettings>().As<IStartable>().AsSelf().As<IAppSettings>().SingleInstance();
             builder.RegisterType<Now>().As<INow>().SingleInstance();
+
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();
         }
     }
 }

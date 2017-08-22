@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
 using App.Template.XForms.Android.Infrastructure.Interaction;
+using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Utils.Interaction;
 using App.Template.XForms.Core.ViewModels;
 using MvvmCross.Core.Navigation;
@@ -14,7 +17,6 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -46,6 +48,15 @@ namespace App.Template.XForms.Android
             }
 
             Mvx.Resolve<IMvxAppStart>().Start();
+
+            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(10));
+            var autheService = Mvx.Resolve<IAuthenticationService>();
+            var needsToAuthenticate = autheService.NeedsToAuthenticate(cancellationTokenSource.Token).GetAwaiter().GetResult();
+            if (needsToAuthenticate)
+            {
+                var token = autheService.GetAccessToken("adam", "asdf3235", cancellationTokenSource.Token).GetAwaiter().GetResult();
+                var accessToken = token.Token;
+            }
 
             ClearStackAndShowViewModel<FirstViewModel>();
 

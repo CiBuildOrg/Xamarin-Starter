@@ -47,7 +47,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__;XAMARIN_AUTH_INTERNAL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -157,11 +157,14 @@
     <PackageReference Include="MvvmCross.Plugin.File">
       <Version>5.1.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Auth">
+      <Version>1.5.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.4.7</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.3.4.267</Version>
+      <Version>2.4.0.266-pre1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

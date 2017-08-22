@@ -1,5 +1,7 @@
-﻿using App.Template.XForms.iOS.Infrastructure.Interaction;
+﻿using Accounts;
+using App.Template.XForms.iOS.Infrastructure.Interaction;
 using Autofac;
+using Xamarin.Auth;
 
 namespace App.Template.XForms.iOS.Bootstrap
 {

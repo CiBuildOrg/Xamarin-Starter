@@ -19,11 +19,6 @@
   </ItemGroup>
    
   <ItemGroup>
-    <None Remove="Resources\appsettings.Development.json" />
-    <None Remove="Resources\appsettings.json" />
-  </ItemGroup>
-   
-  <ItemGroup>
     <EmbeddedResource Include="Resources\appsettings.Development.json" />
     <EmbeddedResource Include="Resources\appsettings.json" />
   </ItemGroup>
@@ -46,27 +41,7 @@
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.2.9" />
   </ItemGroup>
    
-  <ItemGroup>
-    <Compile Update="Views\ScanBarcodeView.xaml.cs">
-      <DependentUpon>ScanBarcodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ThirdView.xaml.cs">
-      <DependentUpon>ThirdView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SecondView.xaml.cs">
-      <DependentUpon>SecondView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\FirstView.xaml.cs">
-      <DependentUpon>FirstView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-   
-  <ItemGroup>
-    <EmbeddedResource Update="Views\FirstView.xaml">
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-   
+  
   <ItemGroup>
     <Folder Include="Utils\Persistence\" />
   </ItemGroup>

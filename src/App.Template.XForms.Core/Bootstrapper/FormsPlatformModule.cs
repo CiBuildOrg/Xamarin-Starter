@@ -25,12 +25,12 @@ namespace App.Template.XForms.Core.Bootstrapper
                 .Where(t => t.GetTypeInfo().IsClass && t.Name.EndsWith(ServicesEnding))
                 .As(t => t.GetInterfaces().Single(i => i.Name.EndsWith(t.Name))).SingleInstance();
 
-            builder.RegisterType<AccessTokenClient>().As<IAccessTokenClient>().SingleInstance();
             builder.RegisterType<AccessTokenStore>().As<IAccessTokenStore>().SingleInstance();
             builder.RegisterType<MvxViewsContainerHelper>().As<IMvxViewsContainerHelper>().SingleInstance();
             builder.RegisterType<AkavacheContext>().As<IKeyValueStore>().SingleInstance();
             builder.RegisterType<ServiceSettings>().As<IServiceSettings>().SingleInstance();
             builder.RegisterType<AppSettings>().As<IStartable>().AsSelf().As<IAppSettings>().SingleInstance();
+            builder.RegisterType<Now>().As<INow>().SingleInstance();
         }
     }
 }

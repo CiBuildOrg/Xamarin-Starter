@@ -112,6 +112,7 @@ namespace App.Template.XForms.Core.Infrastructure
 
             return ExecuteAccessTokenRequest(
                 new ResourceOwnerPasswordCredentialsGrantTokenRequest(username, password, _serverConfiguration.ClientId,
+                _serverConfiguration.ClientSecret,
                     scope, extra), cancellationToken);
         }
 

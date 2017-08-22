@@ -14,6 +14,7 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
         private readonly string _username;
         private readonly string _password;
         private readonly string _clientId;
+        private readonly string _clientSecret;
         private readonly string _scope;
         private readonly Dictionary<string, string> _extra;
 
@@ -32,15 +33,17 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
         /// or
         /// clientId
         /// </exception>
-        public ResourceOwnerPasswordCredentialsGrantTokenRequest(string username, string password, string clientId, string scope, Dictionary<string,string> extra = null)
+        public ResourceOwnerPasswordCredentialsGrantTokenRequest(string username, string password, string clientId, string clientSecret, string scope, Dictionary<string,string> extra = null)
         {
             Requires.NotNullOrEmpty(username, "username");
             Requires.NotNullOrEmpty(password, "password");
             Requires.NotNullOrEmpty(clientId, "clientId");
+            Requires.NotNullOrEmpty(clientId, "clientSecret");
 
             _username = username;
             _password = password;
             _clientId = clientId;
+            _clientSecret = clientSecret;
             _scope = scope;
             _extra = extra;
         }
@@ -57,6 +60,7 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
                                {
                                    { "grant_type", PasswordGrantType },
                                    { "client_id", _clientId },
+                                   { "client_secret", _clientSecret },
                                    { "username", _username },
                                    { "password", _password },
                                    { "scope", _scope }

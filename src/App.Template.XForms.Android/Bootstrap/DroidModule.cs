@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Xamarin.Auth;
 
 namespace App.Template.XForms.Android.Bootstrap
 {
@@ -7,6 +8,12 @@ namespace App.Template.XForms.Android.Bootstrap
         protected override void Load(ContainerBuilder builder)
         {
             // do all Android registrations here
+
+            builder.Register(ctx =>
+            {
+                //var password = ctx.Resolve<IAppSettings>().Security.StorePassword;
+                return AccountStore.Create();
+            });
         }
     }
 }

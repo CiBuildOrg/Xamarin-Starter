@@ -65,7 +65,9 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
                                    { "password", _password },
                                    { "scope", _scope }
                                };
-            foreach(var s in _extra) parameters.Add(s.Key, s.Value);
+
+            if(_extra != null)
+                foreach(var s in _extra) parameters.Add(s.Key, s.Value);
 
             return parameters;
         }

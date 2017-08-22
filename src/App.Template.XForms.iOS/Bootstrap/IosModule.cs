@@ -1,5 +1,4 @@
-﻿using Accounts;
-using App.Template.XForms.iOS.Infrastructure.Interaction;
+﻿using App.Template.XForms.iOS.Infrastructure.Interaction;
 using Autofac;
 using Xamarin.Auth;
 
@@ -11,6 +10,11 @@ namespace App.Template.XForms.iOS.Bootstrap
         {
             // do all IOS registrations here
             builder.Register(x => InteractiveAlerts.Instance).SingleInstance();
+
+            builder.Register(ctx =>
+            {
+                return AccountStore.Create();
+            });
         }
     }
 }

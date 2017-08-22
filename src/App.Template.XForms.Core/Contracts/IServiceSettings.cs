@@ -3,5 +3,6 @@
     public interface IServiceSettings
     {
         string ServiceId { get; }
+        string Version { get; }
     }
 }

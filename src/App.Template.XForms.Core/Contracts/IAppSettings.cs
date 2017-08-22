@@ -8,7 +8,7 @@ namespace App.Template.XForms.Core.Contracts
         string Key { get; }
         string ServiceId { get; set; }
         bool SetupFinished { get; set; }
-
+        Security Security { get; set; }
         void ClearConfiguration();
         void Start();
     }

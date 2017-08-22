@@ -1,3 +1,5 @@
+#define ALWAYS_LOAD
+
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -15,13 +17,17 @@ namespace App.Template.XForms.Core.Options
 
         public bool SetupFinished { get; set; }
         public string ServiceId { get; set; }
+        public string Version { get; set; }
         public BackendHost Identity { get; set; }
+        public Security Security { get; set; }
 
         private readonly IKeyValueStore _store;
+        private readonly IServiceSettings _keyProvider;
 
-        public AppSettings(IKeyValueStore store)
+        public AppSettings(IKeyValueStore store, IServiceSettings keyProvider)
         {
             _store = store;
+            _keyProvider = keyProvider;
             Identity = new BackendHost();
         }
 
@@ -35,21 +41,28 @@ namespace App.Template.XForms.Core.Options
             SetupFinished = false;
         }
 
-        public async void Start()
+        public void Start()
         {
-            var settings = _store.GetObservable<AppSettings>(nameof(AppSettings)).Wait();
-
-            if (settings != null)
-            {
-                SetupFinished = settings.SetupFinished;
-                ServiceId = settings.ServiceId;
-                Identity = settings.Identity;
-            }
-            else
-            {
+            //var settings = _store.GetObservable<AppSettings>(nameof(AppSettings)).Wait();
+            //if (settings != null)
+            //{
+            //    if(_keyProvider.Version != settings.Version)
+            //    {
+            //        LoadFromRessource();
+            //        await Persist();
+            //    }
+            //    else
+            //    {
+            //        SetupFinished = settings.SetupFinished;
+            //        ServiceId = settings.ServiceId;
+            //        Identity = settings.Identity;
+            //    }
+            //}
+            //else
+            //{
                 LoadFromRessource();
-                await Persist();
-            }
+            //    await Persist();
+            //}
         }
 
         /// <summary>
@@ -63,6 +76,7 @@ namespace App.Template.XForms.Core.Options
             //App
             var appToken = intermediate["App"];
             ServiceId = (string)appToken["ServiceId"];
+            SetupFinished = (bool)appToken["SetupFinished"];
 
             //Backend
             var backendTokenIdentity = intermediate["Backend"]["Identity"];
@@ -71,7 +85,15 @@ namespace App.Template.XForms.Core.Options
                 Host = (string)backendTokenIdentity["Host"],
                 Port = (int)backendTokenIdentity["Port"],
                 Secure = (bool)backendTokenIdentity["Secure"],
-                TimeOut = (int)backendTokenIdentity["TimeOut"]
+                TimeOut = (int)backendTokenIdentity["TimeOut"],
+                ClientId = (string)backendTokenIdentity["ClientId"],
+                ClientSecret = (string)backendTokenIdentity["ClientSecret"]
+            };
+
+            var security = intermediate["Security"];
+            Security = new Security
+            {
+                StorePassword = (string)security["StorePassword"]
             };
         }
 

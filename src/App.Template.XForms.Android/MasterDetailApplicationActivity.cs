@@ -49,14 +49,14 @@ namespace App.Template.XForms.Android
 
             Mvx.Resolve<IMvxAppStart>().Start();
 
-            var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(10));
-            var autheService = Mvx.Resolve<IAuthenticationService>();
-            var needsToAuthenticate = autheService.NeedsToAuthenticate(cancellationTokenSource.Token).GetAwaiter().GetResult();
-            if (needsToAuthenticate)
-            {
-                var token = autheService.GetAccessToken("adam", "asdf3235", cancellationTokenSource.Token).GetAwaiter().GetResult();
-                var accessToken = token.Token;
-            }
+            //var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(10));
+            //var autheService = Mvx.Resolve<IAuthenticationService>();
+            //var needsToAuthenticate = autheService.NeedsToAuthenticate(cancellationTokenSource.Token);
+            //if (needsToAuthenticate)
+            //{
+            //    var token = autheService.GetAccessToken("adam", "asdf3235", cancellationTokenSource.Token);
+            //    var accessToken = token.Token;
+            //}
 
             ClearStackAndShowViewModel<FirstViewModel>();
 

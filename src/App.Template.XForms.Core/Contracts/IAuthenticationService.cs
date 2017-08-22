@@ -6,8 +6,8 @@ namespace App.Template.XForms.Core.Contracts
 {
     public interface IAuthenticationService
     {
-        Task<bool> NeedsToAuthenticate(CancellationToken cancellationToken);
-        Task<AccessToken> GetAccessToken(string username, string password, CancellationToken cancellationToken);
-        Task<AccessToken> GetAccessToken(CancellationToken cancellationToken);
+        bool NeedsToAuthenticate(CancellationToken cancellationToken);
+        AccessToken GetAccessToken(string username, string password, CancellationToken cancellationToken);
+        AccessToken GetAccessToken(CancellationToken cancellationToken);
     }
 }

@@ -19,15 +19,15 @@ namespace App.Template.XForms.Core.Infrastructure.Services
             _appSettings = appSettings;
         }
 
-        public async Task<bool> NeedsToAuthenticate(CancellationToken cancellationToken)
+        public bool NeedsToAuthenticate(CancellationToken cancellationToken)
         {
-            var hasToken = await _accessTokenStore.HasAccessToken(_appSettings.Identity.ClientId,
-                _appSettings.ServiceId, cancellationToken);
+            var hasToken = _accessTokenStore.HasAccessToken(_appSettings.Identity.ClientId,
+                _appSettings.ServiceId, cancellationToken).GetAwaiter().GetResult(); 
             if (!hasToken)
-                return false;
+                return true;
 
-            var token = await _accessTokenStore.GetClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
-                cancellationToken);
+            var token =  _accessTokenStore.GetClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
+                cancellationToken).GetAwaiter().GetResult();
 
             if (token.ShouldBeRefreshed(TimeSpan.FromMinutes(2)))
             {
@@ -37,9 +37,9 @@ namespace App.Template.XForms.Core.Infrastructure.Services
 
                 try
                 {
-                    var newToken = await accessTokenClient.RefreshToken(token.RefreshToken, cancellationToken);
-                    await _accessTokenStore.SaveClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
-                        newToken, cancellationToken);
+                    var newToken = accessTokenClient.RefreshToken(token.RefreshToken, cancellationToken).GetAwaiter().GetResult();
+                     _accessTokenStore.SaveClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
+                        newToken, cancellationToken).GetAwaiter().GetResult();
 
                     return false;
                 }
@@ -51,22 +51,22 @@ namespace App.Template.XForms.Core.Infrastructure.Services
             else return false;
         }
 
-        public async Task<AccessToken> GetAccessToken(string username, string password, CancellationToken cancellationToken)
+        public AccessToken GetAccessToken(string username, string password, CancellationToken cancellationToken)
         {
             var accessTokenClient = new AccessTokenClient(new OAuthServerConfiguration(_appSettings.Identity.Host, "/auth/token", 
                 _appSettings.Identity.ClientId, _appSettings.Identity.ClientSecret));
 
-            var token = await accessTokenClient.GetUserAccessToken(username, password, "", cancellationToken);
-            await _accessTokenStore.SaveClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
-                token, cancellationToken);
+            var token =  accessTokenClient.GetUserAccessToken(username, password, "", cancellationToken).GetAwaiter().GetResult();
+             _accessTokenStore.SaveClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
+                token, cancellationToken).GetAwaiter().GetResult();
 
             return token;
         }
 
-        public async Task<AccessToken> GetAccessToken(CancellationToken cancellationToken)
+        public AccessToken GetAccessToken(CancellationToken cancellationToken)
         {
-            var token = await _accessTokenStore.GetClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
-                cancellationToken);
+            var token =  _accessTokenStore.GetClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
+                cancellationToken).GetAwaiter().GetResult();
 
             return token;
         }

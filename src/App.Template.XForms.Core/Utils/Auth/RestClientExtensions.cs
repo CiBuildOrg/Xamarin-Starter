@@ -30,7 +30,7 @@ namespace App.Template.XForms.Core.Utils.Auth
 
             try
             {
-                client.ExecuteAsync(request, token).ContinueWith(x =>
+                client.Execute(request, token).ContinueWith(x =>
                 {
                     var response = x.Result;
                     if (token.IsCancellationRequested)

@@ -8,6 +8,8 @@ namespace App.Template.XForms.Core.Options
         public bool Secure { get; set; }
         public string Host { get; set; }
         public int Port { get; set; }
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
 
         private Uri _url;
         public Uri GetUrl()

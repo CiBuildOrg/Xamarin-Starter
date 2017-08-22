@@ -5,6 +5,8 @@ This will serve as a general base for creating a Xamarin Application in .NET.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Deployment notes on how to deploy this on real devices will come later.
 
+### Running in conjunction with an API server read [RUNNING](https://github.com/CiBuildOrg/Xamarin-Starter/blob/master/RUNNING.md)
+
 ### Prerequisites
 
 You need Visual Studio 2017 to compile this. 

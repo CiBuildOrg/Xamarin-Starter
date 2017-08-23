@@ -2,6 +2,9 @@
 
 This contains some instructions on how to link the xamarin app to the [Web api boilerplate](https://github.com/CiBuildOrg/WebApi-Boilerplate) 
 
+## Worth knowing
+For now I intentionally don't support registering. App will (for now) work with users already registered in the api through the seed method to keep things simple. In the future it will have a register page and the whole shebang. 
+
 ## Getting Started
 
 Install web api boilerplate (following the instructions on [README](https://github.com/CiBuildOrg/WebApi-Boilerplate/blob/master/README.md))

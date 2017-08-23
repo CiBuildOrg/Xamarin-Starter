@@ -9,8 +9,13 @@ namespace App.Template.XForms.Core.Views
         public FirstView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            NavigationPage.SetHasBackButton(this, false);
+            //NavigationPage.SetHasNavigationBar(this, false);
+            //NavigationPage.SetHasBackButton(this, false);
         }
+
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    return true;
+        //}
     }
 }

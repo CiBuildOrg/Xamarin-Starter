@@ -19,6 +19,15 @@
   </ItemGroup>
    
   <ItemGroup>
+    <None Remove="Assets\close_modal.png" />
+    <None Remove="Assets\header.png" />
+    <None Remove="Assets\verified.png" />
+  </ItemGroup>
+   
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\close_modal.png" />
+    <EmbeddedResource Include="Assets\header.png" />
+    <EmbeddedResource Include="Assets\verified.png" />
     <EmbeddedResource Include="Resources\appsettings.Development.json" />
     <EmbeddedResource Include="Resources\appsettings.json" />
   </ItemGroup>

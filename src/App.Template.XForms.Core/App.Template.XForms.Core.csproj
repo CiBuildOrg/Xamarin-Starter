@@ -54,4 +54,11 @@
     <Folder Include="Utils\Persistence\" />
   </ItemGroup>
    
+  
+  <ItemGroup>
+    <Compile Update="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+   
 </Project>

@@ -62,7 +62,7 @@ namespace App.Template.XForms.Android
             //}
 
 
-            ClearStackAndShowViewModel<FirstViewModel>();
+            ClearStackAndShowViewModel<LoginViewModel>();
 
             _lifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
             _lifetimeListener.OnCreate(this);

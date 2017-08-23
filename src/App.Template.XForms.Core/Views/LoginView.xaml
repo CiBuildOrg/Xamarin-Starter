@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviours="clr-namespace:App.Template.XForms.Core.Forms.Behaviors;assembly=App.Template.XForms.Core"
+             x:Class="App.Template.XForms.Core.Views.LoginView"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+             Title="Authenticate">
+    <RelativeLayout>
+        <RelativeLayout x:Name="Top" BackgroundColor="#3789C6"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Height,
+                                        Factor=0.5}">
+            <RelativeLayout.Behaviors>
+                <behaviours:TopGroupBehaviour Title="{x:Reference HeaderTitle}"
+              TitleLabel="{x:Reference HeaderMessage}"
+              TopIcon="{x:Reference HeroIcon}"
+              CloseIcon="{x:Reference CloseIcon}" />
+
+            </RelativeLayout.Behaviors>
+            <BoxView WidthRequest="37" HeightRequest="37" Color="#3789C6" Rotation="45"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, 
+               Property=Height, 
+               ElementName=Top, 
+               Factor=1, 
+               Constant=-18}"
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, 
+        Property=Width, 
+        ElementName=Top, 
+        Factor=0.5, 
+        Constant=-18}" />
+            <Image x:Name="CloseIcon" WidthRequest="28" HeightRequest="28"
+             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.02}"
+             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=0.05}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCancelClicked" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Label x:Name="HeaderTitle" TextColor="White" FontSize="28" HorizontalOptions="Center"
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=1}"
+             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.025}"
+             Text="Authenticate" />
+
+            <Image AnchorY="0.13" HeightRequest="160" WidthRequest="160" x:Name="HeroIcon"
+             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.37}"
+
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=1}" />
+
+            <Label x:Name="HeaderMessage" TextColor="White" FontSize="18" HorizontalOptions="Center"
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=1,
+             }"
+             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.875}"
+             Text="Sign in to your account" />
+
+        </RelativeLayout>
+
+        <RelativeLayout x:Name="InputForm"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, 
+               Property=Height, 
+               ElementName=Top, 
+               Factor=1,
+               Constant=42}"
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, 
+               Property=Width, 
+               Factor=0.1}"
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.8}"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.8}">
+
+            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+                <Label FontSize="Small" x:Name="ErrorMessage" IsVisible="False" TextColor="#FF3939" Text="Wrong username or password" />
+
+                <StackLayout x:Name="InputEntryContainer">
+                    <ContentView Padding="0, 10, 0, 0">
+                        <Entry x:Name="UsernameEntry" Keyboard="Text" Placeholder="Username">
+                            <Entry.Behaviors>
+                                <behaviours:EntrySanityBehaviour x:Name="UserNameEntryBehavior" MinCharLength="3" DoRemoveWhiteSpace="True" CheckIsEmail="False" FailOnEmtpyEntry="True"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </ContentView>
+                    <ContentView Padding="0, 10, 0, 0">
+                        <Entry x:Name="PasswordEntry" Keyboard="Text" Placeholder="Password" IsPassword="True">
+                            <Entry.Behaviors>
+                                <behaviours:EntrySanityBehaviour x:Name="PasswordEntryBehavior" MinCharLength="3" DoRemoveWhiteSpace="True" CheckIsEmail="False" FailOnEmtpyEntry="True" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </ContentView>
+                </StackLayout>
+
+                <ContentView Padding="0, 10, 0, 0">
+                    <Button x:Name="LoginButton" WidthRequest="120" Clicked="OnSubmitClicked" BackgroundColor="#b42644"
+                  Text="Log in" TextColor="WhiteSmoke" />
+                </ContentView>
+                <ContentView Padding="0, 10, 0, 0">
+                    <Button x:Name="RegistrationButton" WidthRequest="120" BackgroundColor="#7ADBF8"
+                  IsEnabled="False"
+                  Text="Register" />
+                </ContentView>
+                <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" />
+
+            </StackLayout>
+        </RelativeLayout>
+
+        <ContentView x:Name="ControllerBag">
+            <ContentView.Behaviors>
+                <behaviours:AuthenticationBehaviour
+                      TopGroup="{x:Reference Top}"
+                      FormGroup="{x:Reference InputForm}"
+                      LoginButton="{x:Reference LoginButton}"
+                      ErrorMessage="{x:Reference ErrorMessage}"
+                      LoadingIndicator="{x:Reference LoadingIndicator}" />
+            </ContentView.Behaviors>
+        </ContentView>
+    </RelativeLayout>
+</views:MvxContentPage>

@@ -154,6 +154,9 @@
     <PackageReference Include="Autofac">
       <Version>4.6.1</Version>
     </PackageReference>
+    <PackageReference Include="modernhttpclient">
+      <Version>2.4.2</Version>
+    </PackageReference>
     <PackageReference Include="MvvmCross.Plugin.File">
       <Version>5.1.1</Version>
     </PackageReference>

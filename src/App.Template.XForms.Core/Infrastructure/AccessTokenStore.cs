@@ -42,24 +42,24 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <exception cref="System.ArgumentNullException">username
         /// or
         /// serviceId</exception>
-        public Task<AccessToken> GetUserAccessToken(string username, string serviceId,
+        public async Task<AccessToken> GetUserAccessToken(string username, string serviceId,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(username, "username");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
 
-            return GetAccessToken(NormalizeUsername(username), serviceId, cancellationToken);
+            return await GetAccessToken(NormalizeUsername(username), serviceId, cancellationToken).ConfigureAwait(false);
         }
 
-        public Task<bool> HasAccessToken(string clientId, string serviceId, CancellationToken cancellationToken)
+        public async Task<bool> HasAccessToken(string clientId, string serviceId, CancellationToken cancellationToken)
         {
-            return Task.Factory.StartNew(() =>
+            return await Task.Factory.StartNew(() =>
             {
                 var normalizedUsername = NormalizeClientId(clientId);
                 var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
                     StringComparison.CurrentCultureIgnoreCase));
                 return account != null;
-            }, cancellationToken);
+            }, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <exception cref="System.ArgumentNullException">clientId
         /// or
         /// serviceId</exception>
-        public Task<AccessToken> GetClientAccessToken(string clientId, string serviceId,
+        public async Task<AccessToken> GetClientAccessToken(string clientId, string serviceId,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(clientId, "clientId");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
-            return GetAccessToken(NormalizeClientId(clientId), serviceId, cancellationToken);
+            return await GetAccessToken(NormalizeClientId(clientId), serviceId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -90,13 +90,13 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <param name="accessToken">The access token.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The task that represents the save action.</returns>
-        public Task SaveUserAccessToken(string username, string serviceId, AccessToken accessToken,
+        public async Task SaveUserAccessToken(string username, string serviceId, AccessToken accessToken,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(username, "username");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
             Requires.NotNull(accessToken, "accessToken");
-            return SaveAccessToken(NormalizeUsername(username), serviceId, accessToken, cancellationToken);
+            await SaveAccessToken(NormalizeUsername(username), serviceId, accessToken, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,31 +107,31 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <param name="accessToken">The access token.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The task that represents the save action.</returns>
-        public Task SaveClientAccessToken(string clientId, string serviceId, AccessToken accessToken,
+        public async Task SaveClientAccessToken(string clientId, string serviceId, AccessToken accessToken,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(clientId, "clientId");
             Requires.NotNullOrEmpty(serviceId, "serviceId");
             Requires.NotNull(accessToken, "accessToken");
 
-            return SaveAccessToken(NormalizeClientId(clientId), serviceId, accessToken, cancellationToken);
+            await SaveAccessToken(NormalizeClientId(clientId), serviceId, accessToken, cancellationToken).ConfigureAwait(false);
         }
 
-        private Task<AccessToken> GetAccessToken(string normalizedUsername, string serviceId,
+        private async Task<AccessToken> GetAccessToken(string normalizedUsername, string serviceId,
             CancellationToken cancellationToken)
         {
-            return Task.Factory.StartNew(() =>
+            return await Task.Factory.StartNew(() =>
             {
                 var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
                         StringComparison.CurrentCultureIgnoreCase));
                 return account == null ? null : new AccessToken(account.Properties);
-            }, cancellationToken);
+            }, cancellationToken).ConfigureAwait(false);
         }
 
-        private Task SaveAccessToken(string normalizedUsername, string serviceId, AccessToken accessToken,
+        private async Task SaveAccessToken(string normalizedUsername, string serviceId, AccessToken accessToken,
             CancellationToken cancellationToken)
         {
-            return Task.Factory.StartNew(
+            await Task.Factory.StartNew(
                 () =>
                 {
                     var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
@@ -143,7 +143,7 @@ namespace App.Template.XForms.Core.Infrastructure
                     }
                     _accountStore.Save(new Account(normalizedUsername, accessToken.ToDictionary()), serviceId);
                 },
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
         }
 
         private static string NormalizeUsername(string username)

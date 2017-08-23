@@ -57,8 +57,6 @@ namespace App.Template.XForms.Core.Infrastructure.Services
             var accessTokenClient = new AccessTokenClient(new OAuthServerConfiguration(_appSettings.Identity.Host, "/auth/token", 
                 _appSettings.Identity.ClientId, _appSettings.Identity.ClientSecret));
 
-            //var str = accessTokenClient.AnotherExample().Result;
-
             var token = await accessTokenClient.GetUserAccessToken(username, password, "", cancellationToken).ConfigureAwait(false);
             await _accessTokenStore.SaveClientAccessToken(_appSettings.Identity.ClientId, _appSettings.ServiceId,
                 token, cancellationToken);

@@ -53,7 +53,7 @@ namespace App.Template.XForms.Android
 
             var cancellationToken = CancellationToken.None;
             var autheService = Mvx.Resolve<IAuthenticationService>();
-            var needsToAuthenticate =  autheService.NeedsToAuthenticate(cancellationToken).Result;
+            var needsToAuthenticate =  autheService.NeedsToAuthenticate(cancellationToken).WaitAsync().Result;
             if (needsToAuthenticate)
             {
                 var token = autheService.GetAccessToken("adam", "asdf3235", cancellationToken).WaitAsync().Result;

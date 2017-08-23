@@ -32,7 +32,6 @@ namespace App.Template.XForms.Core.Infrastructure
             _serverConfiguration = serverConfiguration;
         }
 
-
         /// <summary>
         /// Gets an access token for a client.
         /// </summary>
@@ -103,25 +102,6 @@ namespace App.Template.XForms.Core.Infrastructure
                     scope, extra), cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<string> AnotherExample()
-        {
-            return await Example().ConfigureAwait(false);
-        }
-
-        public async Task<string> Example()
-        {
-            // RestUrl = http://developer.xamarin.com:8081/api/todoitems/
-            var uri = new Uri("http://10.0.2.2/App.Api/");
-            var response = await new HttpClient().GetAsync(uri).ConfigureAwait(false);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                return content;
-            }
-
-            return string.Empty;
-        }
-
         /// <summary>
         /// Exchanged a refresh token for a new access token.
         /// </summary>
@@ -166,7 +146,9 @@ namespace App.Template.XForms.Core.Infrastructure
                 using (var streamReader = new StreamReader(stream))
                 {
                     var serializer = new JsonSerializer();
-                    return serializer.Deserialize<AccessToken>(new JsonTextReader(streamReader));
+                    var accessTokenResponse = serializer.Deserialize<AccessTokenResponse>(new JsonTextReader(streamReader));
+
+                    return accessTokenResponse.ToAccessToken();
                 }
             }
         }

@@ -1,11 +1,11 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 
-namespace MvvmCross.Plugins.Validation.ViewModels
+namespace App.Template.XForms.Core.Utils.Validation.ViewModels
 {
     public class ViewModelBase : MvxViewModel
     {
-        protected IMvxMessenger Messenger { get; private set; }
+        protected IMvxMessenger Messenger { get; }
 
         public ViewModelBase(IMvxMessenger messenger)
         {

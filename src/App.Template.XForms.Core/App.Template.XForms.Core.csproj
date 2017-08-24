@@ -19,11 +19,6 @@
   </ItemGroup>
    
   <ItemGroup>
-    <Compile Remove="Utils\Validation\ViewModels\ValidatingViewModel.cs" />
-    <Compile Remove="Utils\Validation\ViewModels\ViewModelBase.cs" />
-  </ItemGroup>
-   
-  <ItemGroup>
     <None Remove="Assets\close_modal.png" />
     <None Remove="Assets\header.png" />
     <None Remove="Assets\verified.png" />
@@ -59,7 +54,6 @@
   
   <ItemGroup>
     <Folder Include="Utils\Persistence\" />
-    <Folder Include="Utils\Validation\ViewModels\" />
     <Folder Include="Utils\Validation\Validators\" />
   </ItemGroup>
    

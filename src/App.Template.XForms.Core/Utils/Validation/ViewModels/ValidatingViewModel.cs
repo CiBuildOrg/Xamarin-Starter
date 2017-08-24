@@ -1,18 +1,16 @@
 ﻿using System;
 using MvvmCross.Plugins.Messenger;
 
-namespace MvvmCross.Plugins.Validation.ViewModels
+namespace App.Template.XForms.Core.Utils.Validation.ViewModels
 {
     public abstract class ValidatingViewModel : ViewModelBase
     {
-        public IValidator Validator { get; private set; }
+        public IValidator Validator { get; }
 
         protected ValidatingViewModel(IValidator validator, IMvxMessenger messenger)
             : base(messenger)
         {
-            if (validator == null)
-                throw new ArgumentNullException("validator");
-            Validator = validator;
+            Validator = validator ?? throw new ArgumentNullException(nameof(validator));
         }
 
         public IErrorCollection Validate(string group = null)

@@ -2,6 +2,7 @@
 using App.Template.XForms.Core.Forms.Behaviors;
 using System;
 using System.Threading;
+using App.Template.XForms.Core.Models;
 using App.Template.XForms.Core.ViewModels;
 using Xamarin.Forms.Xaml;
 
@@ -13,11 +14,9 @@ namespace App.Template.XForms.Core.Views
     {
         private AuthenticationBehaviour _authenticationBehaviour;
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private AuthPageConfiguration _authPageConfiguration;
 
         public LoginView()
         {
-            _authPageConfiguration = new AuthPageConfiguration();
             //_authenticator = authenticator;
             //_authenticator.Completed += AuthenticatorOnCompleted;
             //_authenticator.Error += AuthenticatorOnError;
@@ -31,11 +30,6 @@ namespace App.Template.XForms.Core.Views
 
         protected void ConfigurePage()
         {
-            HeaderTitle.Text = _authPageConfiguration.Title;
-            HeaderMessage.Text = _authPageConfiguration.SubTitle;
-            CloseIcon.IsVisible = _authPageConfiguration.ShowCloseButton;
-            HeaderTitle.IsVisible = _authPageConfiguration.ShowHeader;
-            RegistrationButton.IsVisible = _authPageConfiguration.ShowRegistrationButton;
         }
 
         protected override void OnDisappearing()

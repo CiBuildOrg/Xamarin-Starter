@@ -1,4 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using App.Template.XForms.Core.Models;
+using App.Template.XForms.Core.Resources;
+using MvvmCross.Core.ViewModels;
 
 namespace App.Template.XForms.Core.ViewModels
 {
@@ -6,23 +8,28 @@ namespace App.Template.XForms.Core.ViewModels
     {
         public LoginViewModel()
         {
-            
+            LoginConfig = LoadConfiguration();
         }
 
-    }
+        private static AuthPageConfiguration LoadConfiguration()
+        {
+            return new AuthPageConfiguration
+            {
+                Title = Texts.AuthPageTitle,
+                SubTitle = Texts.AuthPageSubtitle,
+                ShowCloseButton = false,
+                ShowHeader = false,
+                ShowRegistrationButton = false
+            };
+        }
 
+        private AuthPageConfiguration _loginConfig;
 
-    /// <summary>
-    /// Configure the appereance of the authentication page.
-    /// </summary>
-    public class AuthPageConfiguration
-    {
-        public string Title { get; set; } = "Authenticate";
-        public string SubTitle { get; set; } = "Sign in to your Account";
-        public bool ShowCloseButton { get; set; } = false;
-        public bool ShowRegistrationButton { get; set; } = false;
-        public bool ShowHeader { get; set; } = false;
-        public uint MinUsernameLength { get; set; } = 2;
-        public uint MinPasswordLength { get; set; } = 4;
+        public AuthPageConfiguration LoginConfig
+        {
+            get => _loginConfig;
+            set => SetProperty(ref _loginConfig, value);
+        }
+
     }
 }

@@ -29,7 +29,7 @@
         ElementName=Top, 
         Factor=0.5, 
         Constant=-18}" />
-            <Image x:Name="CloseIcon" WidthRequest="28" HeightRequest="28"
+            <Image x:Name="CloseIcon" WidthRequest="28" HeightRequest="28" IsVisible="{Binding LoginConfig.ShowCloseButton}"
              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
              ElementName=Top,
              Property=Height,
@@ -42,16 +42,13 @@
                     <TapGestureRecognizer Tapped="OnCancelClicked" />
                 </Image.GestureRecognizers>
             </Image>
-            <Label x:Name="HeaderTitle" TextColor="White" FontSize="28" HorizontalOptions="Center"
-             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView,
-             ElementName=Top,
-             Property=Width,
-             Factor=1}"
+            <Label x:Name="HeaderTitle" TextColor="White" FontSize="28" HorizontalOptions="Center" IsVisible="{Binding LoginConfig.ShowHeader}"
+             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Top, Property=Width, Factor=1}"
              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
              ElementName=Top,
              Property=Height,
              Factor=0.025}"
-             Text="Authenticate" />
+             Text="{Binding LoginConfig.Title}" />
 
             <Image AnchorY="0.13" HeightRequest="160" WidthRequest="160" x:Name="HeroIcon"
              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
@@ -74,7 +71,7 @@
              ElementName=Top,
              Property=Height,
              Factor=0.875}"
-             Text="Sign in to your account" />
+             Text="{Binding LoginConfig.SubTitle}" />
 
         </RelativeLayout>
 
@@ -116,7 +113,7 @@
                 </ContentView>
                 <ContentView Padding="0, 10, 0, 0">
                     <Button x:Name="RegistrationButton" WidthRequest="120" BackgroundColor="#7ADBF8"
-                  IsEnabled="False"
+                  IsEnabled="False" IsVisible="{Binding LoginConfig.ShowRegistrationButton}"
                   Text="Register" />
                 </ContentView>
                 <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" />

@@ -4,6 +4,7 @@ using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using App.Template.XForms.Core.Contracts;
+using App.Template.XForms.Core.Resources;
 using Autofac;
 
 namespace App.Template.XForms.Core.Options
@@ -41,34 +42,41 @@ namespace App.Template.XForms.Core.Options
             SetupFinished = false;
         }
 
-        public void Start()
+        public async void Start()
         {
-            //var settings = _store.GetObservable<AppSettings>(nameof(AppSettings)).Wait();
-            //if (settings != null)
-            //{
-            //    if(_keyProvider.Version != settings.Version)
-            //    {
-            //        LoadFromRessource();
-            //        await Persist();
-            //    }
-            //    else
-            //    {
-            //        SetupFinished = settings.SetupFinished;
-            //        ServiceId = settings.ServiceId;
-            //        Identity = settings.Identity;
-            //    }
-            //}
-            //else
-            //{
+            var settings = _store.GetObservable<AppSettings>(nameof(AppSettings)).Wait();
+            if (settings != null)
+            {
+                if (_keyProvider.Version != settings.Version)
+                {
+                    if (ResourceKeys.IsDebug)
+                    {
+                        await Destroy();
+                    }
+
+                    LoadFromRessource();
+                    await Persist();
+                }
+                else
+                {
+                    SetupFinished = settings.SetupFinished;
+                    ServiceId = settings.ServiceId;
+                    Identity = settings.Identity;
+                    Version = settings.Version;
+                    Security = settings.Security;
+                }
+            }
+            else
+            {
                 LoadFromRessource();
-            //    await Persist();
-            //}
+                await Persist();
+            }
         }
 
         /// <summary>
         /// Load from an embedded json ressource.
         /// </summary>
-        private void LoadFromRessource(string relativePath = "App.Template.XForms.Core.Resources")
+        private void LoadFromRessource(string relativePath = ConfigResourcesPath.Path)
         {
             var intermediate = LoadJObject(relativePath);
             if (intermediate == null)
@@ -95,6 +103,12 @@ namespace App.Template.XForms.Core.Options
             {
                 StorePassword = (string)security["StorePassword"]
             };
+        }
+
+        private async Task Destroy()
+        {
+            await _store.Remove(this);
+            await _store.Persist();
         }
 
         private async Task Persist()

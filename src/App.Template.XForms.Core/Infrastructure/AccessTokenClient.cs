@@ -136,7 +136,7 @@ namespace App.Template.XForms.Core.Infrastructure
         private async Task<AccessToken> ExecuteAccessTokenRequest(TokenRequest tokenRequest,
             CancellationToken cancellationToken)
         {
-            var url = _serverConfiguration.BaseUrl + _serverConfiguration.TokensUrl;
+            var url = _serverConfiguration.BaseUrl  + _serverConfiguration.TokensUrl;
             var content = await tokenRequest.MakeCall(url, cancellationToken).ConfigureAwait(false);
 
             // convert string to stream

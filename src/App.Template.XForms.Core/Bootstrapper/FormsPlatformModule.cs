@@ -5,6 +5,7 @@ using App.Template.XForms.Core.Infrastructure;
 using App.Template.XForms.Core.Infrastructure.Services;
 using App.Template.XForms.Core.MvvmCross;
 using App.Template.XForms.Core.Options;
+using App.Template.XForms.Core.Utils.Validation;
 using Autofac;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform;
@@ -34,6 +35,7 @@ namespace App.Template.XForms.Core.Bootstrapper
             builder.RegisterType<Now>().As<INow>().SingleInstance();
 
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();
+            builder.RegisterType<Validator>().As<IValidator>().InstancePerRequest();
         }
     }
 }

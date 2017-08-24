@@ -15,7 +15,6 @@ using App.Template.XForms.Android.Bootstrap;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
-using App.Template.XForms.Core.ViewModels;
 using Autofac;
 using MvvmCross.Forms.Core;
 using MvvmCross.Platform.IoC;

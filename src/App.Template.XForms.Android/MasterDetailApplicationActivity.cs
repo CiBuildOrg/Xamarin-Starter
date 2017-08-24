@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
 using App.Template.XForms.Android.Infrastructure.Interaction;
-using App.Template.XForms.Core.Contracts;
-using App.Template.XForms.Core.Extensions;
-using App.Template.XForms.Core.Utils.Interaction;
 using App.Template.XForms.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;

@@ -16,13 +16,11 @@ using System.Reflection;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
-using App.Template.XForms.Core.ViewModels;
 using App.Template.XForms.iOS.Bootstrap;
 using Autofac;
 using MvvmCross.Platform.IoC;
 using UIKit;
 using Xamarin.Forms;
-using MvvmCross.Core.Navigation;
 
 namespace App.Template.XForms.iOS
 {

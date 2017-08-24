@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Android.Text;
 using Android.Widget;
 using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Utils.Validation;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Plugins.Messenger;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Plugins.Messenger;
 
-namespace MvvmCross.Plugins.Validation.Droid
+namespace App.Template.XForms.Android.Infrastructure.Validation
 {
     public class MvxAndroidValidationService : MvxValidationService
     {
@@ -24,7 +23,7 @@ namespace MvvmCross.Plugins.Validation.Droid
         {
             Initialize();
 
-            Type textBinding = typeof(MvxTextViewTextTargetBinding);
+            var textBinding = typeof(MvxTextViewTextTargetBinding);
             TextViewGetter = textBinding.GetProperty("TextView",
                                                      BindingFlags.NonPublic | BindingFlags.GetProperty |
                                                      BindingFlags.Instance);
@@ -48,11 +47,15 @@ namespace MvvmCross.Plugins.Validation.Droid
             List<TextView> texts;
             if (_sourceBindingRelationships.TryGetValue(errorInfo.MemberName, out texts))
             {
-                foreach (TextView editText in texts)
+                foreach (var editText in texts)
                 {
+                    
                     if (_firstText == null)
                         _firstText = editText;
-                    editText.ErrorFormatted = Html.FromHtml(string.Format("<font color='black'>{0}</font>", errorInfo.Message));
+                    editText.ErrorFormatted =
+#pragma warning disable 618
+                        Html.FromHtml($"<font color='black'>{errorInfo.Message}</font>");
+#pragma warning restore 618
                 }
             }
         }

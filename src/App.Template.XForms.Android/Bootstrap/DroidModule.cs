@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using App.Template.XForms.Android.Infrastructure.Validation;
+using App.Template.XForms.Core.Contracts;
+using Autofac;
 using Xamarin.Auth;
 
 namespace App.Template.XForms.Android.Bootstrap
@@ -14,6 +16,8 @@ namespace App.Template.XForms.Android.Bootstrap
                 //var password = ctx.Resolve<IAppSettings>().Security.StorePassword;
                 return AccountStore.Create();
             });
+
+            builder.RegisterType<MvxAndroidValidationService>().As<IMvxValidationService>();
         }
     }
 }

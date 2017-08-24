@@ -27,7 +27,7 @@ namespace YoApp.Clients.Forms
             self.AbortAnimation("ColorTo");
         }
 
-        static Task<bool> ColorAnimation(VisualElement element, string name, Func<double, Color> transform,
+        private static Task<bool> ColorAnimation(VisualElement element, string name, Func<double, Color> transform,
             Action<Color> callback, uint length, Easing easing)
         {
             easing = easing ?? Easing.Linear;

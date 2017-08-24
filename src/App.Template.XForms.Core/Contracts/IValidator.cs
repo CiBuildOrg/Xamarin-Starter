@@ -1,4 +1,4 @@
-﻿namespace App.Template.XForms.Core.Utils.Validation
+﻿namespace App.Template.XForms.Core.Contracts
 {
     public interface IValidator
     {

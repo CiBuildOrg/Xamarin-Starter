@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Template.XForms.Core.Contracts;
 using MvvmCross.Plugins.Messenger;
 
 namespace App.Template.XForms.Core.Utils.Validation.ViewModels

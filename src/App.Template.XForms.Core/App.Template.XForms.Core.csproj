@@ -12,7 +12,10 @@
    
   <ItemGroup>
 	<!-- https://bugzilla.xamarin.com/show_bug.cgi?id=55591 -->
+	<Compile Remove="Utils\Persistence\**" />
+	<EmbeddedResource Remove="Utils\Persistence\**" />
 	<None Remove="**\*.xaml" />
+	<None Remove="Utils\Persistence\**" />
 
 	<Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 	<EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
@@ -53,7 +56,6 @@
    
   
   <ItemGroup>
-    <Folder Include="Utils\Persistence\" />
     <Folder Include="Utils\Validation\Validators\" />
   </ItemGroup>
    

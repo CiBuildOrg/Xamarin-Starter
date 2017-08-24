@@ -18,7 +18,7 @@ namespace App.Template.XForms.Core.Forms.Behaviors
         public bool DoRemoveWhiteSpace { get; set; }
         public int MinCharLength { get; set; }
 
-        Entry context;
+        private Entry context;
 
         protected override void OnAttachedTo(Entry bindable)
         {

@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Plugins.Messenger;
+using App.Template.XForms.Core.Contracts;
 
 namespace App.Template.XForms.Core.Utils.Validation
 {

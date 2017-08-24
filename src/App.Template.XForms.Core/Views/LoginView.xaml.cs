@@ -23,9 +23,9 @@ namespace App.Template.XForms.Core.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView
     {
-        AuthenticationBehaviour _authenticationBehaviour;
-        CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        AuthPageConfiguration _authPageConfiguration;
+        private AuthenticationBehaviour _authenticationBehaviour;
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private AuthPageConfiguration _authPageConfiguration;
 
         public LoginView()
         {

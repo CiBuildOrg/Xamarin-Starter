@@ -14,19 +14,19 @@ using UIKit;
 
 namespace App.Template.XForms.iOS.Infrastructure.Validation
 {
-    public class MvxTouchValidationService : MvxValidationService
+    public class MvxIosValidationService : MvxValidationService
     {
         private Dictionary<string, List<UIView>> _sourceBindingRelationships;
         private UIView _firstText;
         private nfloat? _defaultWidth;
         private CGColor _defaultColor;
 
-        readonly IInteractiveAlerts _toastService;
+        private readonly IInteractiveAlerts _toastService;
 
         private static readonly PropertyInfo UiTextViewGetter;
         private static readonly PropertyInfo UiTextFieldGetter;
 
-        static MvxTouchValidationService()
+        static MvxIosValidationService()
         {
             var bindingType = typeof(MvxUITextViewTextTargetBinding);
             UiTextViewGetter = bindingType.GetProperty("View",
@@ -38,7 +38,7 @@ namespace App.Template.XForms.iOS.Infrastructure.Validation
                                                            BindingFlags.Instance);
         }
 
-        public MvxTouchValidationService(IInteractiveAlerts toastService, IValidator validator, IMvxMessenger messenger)
+        public MvxIosValidationService(IInteractiveAlerts toastService, IValidator validator, IMvxMessenger messenger)
             : base(validator, messenger)
         {
             _toastService = toastService;

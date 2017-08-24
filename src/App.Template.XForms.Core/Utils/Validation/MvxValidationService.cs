@@ -11,11 +11,6 @@ using App.Template.XForms.Core.Contracts;
 
 namespace App.Template.XForms.Core.Utils.Validation
 {
-    public interface IMvxValidationService
-    {
-        void SetupForValidation(IMvxBindingContext context, IMvxViewModel viewModel);
-    }
-
     public abstract class MvxValidationService : IMvxValidationService
     {
         protected static FieldInfo TargetBindingGetter;

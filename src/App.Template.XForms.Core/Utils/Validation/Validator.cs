@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using App.Template.XForms.Core.Utils.Validation.Validators;
+using App.Template.XForms.Core.Contracts;
 
 namespace App.Template.XForms.Core.Utils.Validation
 {

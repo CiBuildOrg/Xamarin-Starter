@@ -2,23 +2,11 @@
 using App.Template.XForms.Core.Forms.Behaviors;
 using System;
 using System.Threading;
+using App.Template.XForms.Core.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace App.Template.XForms.Core.Views
 {
-    /// <summary>
-    /// Configure the appereance of the authentication page.
-    /// </summary>
-    public class AuthPageConfiguration
-    {
-        public string Title { get; set; } = "Authenticate";
-        public string SubTitle { get; set; } = "Sign in to your Account";
-        public bool ShowCloseButton { get; set; } = false;
-        public bool ShowRegistrationButton { get; set; } = false;
-        public bool ShowHeader { get; set; } = false;
-        public uint MinUsernameLength { get; set; } = 2;
-        public uint MinPasswordLength { get; set; } = 4;
-    }
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView

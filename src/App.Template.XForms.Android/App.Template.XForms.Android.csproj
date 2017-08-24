@@ -201,6 +201,9 @@
     <PackageReference Include="MvvmCross.Plugin.Messenger">
       <Version>5.1.1</Version>
     </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody">
+      <Version>2.1.4</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v4">
       <Version>25.4.0.1</Version>
     </PackageReference>
@@ -282,6 +285,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\dimen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <PropertyGroup>

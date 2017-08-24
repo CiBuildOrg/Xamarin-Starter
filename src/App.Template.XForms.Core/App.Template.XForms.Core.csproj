@@ -19,6 +19,11 @@
   </ItemGroup>
    
   <ItemGroup>
+    <Compile Remove="Utils\Validation\ViewModels\ValidatingViewModel.cs" />
+    <Compile Remove="Utils\Validation\ViewModels\ViewModelBase.cs" />
+  </ItemGroup>
+   
+  <ItemGroup>
     <None Remove="Assets\close_modal.png" />
     <None Remove="Assets\header.png" />
     <None Remove="Assets\verified.png" />
@@ -39,10 +44,12 @@
     <PackageReference Include="Cheesebaron.MvxPlugins.SimpleWebToken" Version="3.1.0" />
     <PackageReference Include="modernhttpclient" Version="2.4.2" />
     <PackageReference Include="MvvmCross.Forms" Version="5.1.1" />
+    <PackageReference Include="MvvmCross.Plugin.FieldBinding" Version="5.1.1" />
+    <PackageReference Include="MvvmCross.Plugin.Messenger" Version="5.1.1" />
     <PackageReference Include="MvvmCross.Plugin.MethodBinding" Version="5.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Validation" Version="2.4.15" />
-    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.1" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.2.19-beta" />
     <PackageReference Include="Xamarin.Auth" Version="1.5.0.3" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.7" />
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.267" />
@@ -52,6 +59,8 @@
   
   <ItemGroup>
     <Folder Include="Utils\Persistence\" />
+    <Folder Include="Utils\Validation\ViewModels\" />
+    <Folder Include="Utils\Validation\Validators\" />
   </ItemGroup>
    
   

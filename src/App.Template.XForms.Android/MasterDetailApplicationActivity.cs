@@ -67,7 +67,7 @@ namespace App.Template.XForms.Android
             //    }
             //}
 
-            //ClearStackAndShowViewModel<LoginViewModel>();
+            ClearStackAndShowViewModel<LoginViewModel>();
 
             _lifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
             _lifetimeListener.OnCreate(this);
@@ -83,7 +83,6 @@ namespace App.Template.XForms.Android
 
             Mvx.Resolve<IMvxNavigationService>().Navigate<TViewModel>(presentationBundle);
         }
-
 
         protected override void OnDestroy()
         {

@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="AkavacheSqlLinkerOverride.cs" />
     <Compile Include="Bootstrap\DroidModule.cs" />
+    <Compile Include="Bootstrap\FieldBindingPluginBootstrap.cs" />
+    <Compile Include="Bootstrap\MessengerBindingPluginBootstrap.cs" />
     <Compile Include="Bootstrap\MethodBindingPluginBootstrap.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Infrastructure\Interaction\Alerts\EditableInteractiveDialogFragment.cs" />
@@ -189,7 +191,13 @@
     <PackageReference Include="modernhttpclient">
       <Version>2.4.2</Version>
     </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.FieldBinding">
+      <Version>5.1.1</Version>
+    </PackageReference>
     <PackageReference Include="MvvmCross.Plugin.File">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmCross.Plugin.Messenger">
       <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v4">

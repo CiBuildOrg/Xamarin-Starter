@@ -120,6 +120,10 @@ Please read [CONTRIBUTING.md](https://github.com/CiBuildOrg/Xamarin-Starter/blob
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/CiBuildOrg/Xamarin-Starter/tags). 
 
+## Integrated bits 
+
+1. (MvvmCross.Plugins.Validation)[https://github.com/Agies/MVVMCross.Plugins.Validation] - Added MS-PL license in the license file. Integrated in source form because I need to do some modifications to it. 
+In the future I will slim it down to exactly what I need 
 
 ## License
 

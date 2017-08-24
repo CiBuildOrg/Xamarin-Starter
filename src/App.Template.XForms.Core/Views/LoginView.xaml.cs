@@ -1,11 +1,7 @@
 ﻿using App.Template.XForms.Core.Extensions;
 using App.Template.XForms.Core.Forms.Behaviors;
 using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using Xamarin.Auth;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace App.Template.XForms.Core.Views

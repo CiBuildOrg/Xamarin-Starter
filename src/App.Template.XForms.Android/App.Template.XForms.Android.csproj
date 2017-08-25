@@ -86,7 +86,6 @@
     <Compile Include="Infrastructure\Interaction\TopViewHolders\TopContentFactory.cs" />
     <Compile Include="Infrastructure\Interaction\TopViewHolders\WaitTopContentViewHolder.cs" />
     <Compile Include="Infrastructure\Interaction\TopViewHolders\WarningTopContentViewHolder.cs" />
-    <Compile Include="Infrastructure\Validation\MvxAndroidValidationService.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MasterDetailApplicationActivity.cs" />

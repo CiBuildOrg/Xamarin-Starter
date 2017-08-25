@@ -1,6 +1,4 @@
-﻿using App.Template.XForms.Core.Contracts;
-using App.Template.XForms.iOS.Infrastructure.Interaction;
-using App.Template.XForms.iOS.Infrastructure.Validation;
+﻿using App.Template.XForms.iOS.Infrastructure.Interaction;
 using Autofac;
 using Xamarin.Auth;
 
@@ -14,8 +12,6 @@ namespace App.Template.XForms.iOS.Bootstrap
             builder.Register(x => InteractiveAlerts.Instance).SingleInstance();
 
             builder.Register(ctx => AccountStore.Create());
-
-            builder.RegisterType<MvxIosValidationService>().As<IMvxValidationService>();
         }
     }
 }

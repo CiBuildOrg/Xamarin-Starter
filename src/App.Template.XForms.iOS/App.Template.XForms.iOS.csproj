@@ -112,7 +112,6 @@
     <Compile Include="Infrastructure\Interaction\SclActionType.cs" />
     <Compile Include="Infrastructure\Interaction\SclAnimationStyle.cs" />
     <Compile Include="Infrastructure\Interaction\SclAlertViewResponder.cs" />
-    <Compile Include="Infrastructure\Validation\MvxTouchValidationService.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

@@ -37,13 +37,13 @@ namespace App.Template.XForms.Core.Views
             base.OnAppearing();
 
             _loginStartSubscriptionToken =
-                _messenger.SubscribeOnMainThread<StartLoginMessage>(OnStart);
+                _messenger.SubscribeOnThreadPoolThread<StartLoginMessage>(OnStart);
 
             _loginSuccessSubscriptionToken =
-                _messenger.SubscribeOnMainThread<LoginSuccessMessage>(OnLoginSuccess);
+                _messenger.SubscribeOnThreadPoolThread<LoginSuccessMessage>(OnLoginSuccess);
 
             _loginFailureSubscriptionToken =
-                _messenger.SubscribeOnMainThread<LoginFailureMessage>(OnLoginFailure);
+                _messenger.SubscribeOnThreadPoolThread<LoginFailureMessage>(OnLoginFailure);
         }
 
         protected override void OnDisappearing()

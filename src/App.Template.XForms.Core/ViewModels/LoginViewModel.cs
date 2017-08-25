@@ -43,30 +43,16 @@ namespace App.Template.XForms.Core.ViewModels
             set => SetProperty(ref _loginModel, value, nameof(LoginModel));
         }
 
-        public bool CanContinue()
-        {
-            var loginModel = new LoginModel();
-
-            var errors = loginModel.ValidateModel();
-
-            return false;
-        }
-
         private IMvxCommand _submitCommand;
-
         public IMvxCommand SubmitCommand => _submitCommand ??
                                             (_submitCommand = new MvxAsyncCommand(async () => await Submit())); 
 
-
-
         public async Task Submit()
         {
-            await Task.Delay(2000);
-
             var validation = LoginModel.ValidateModel();
             if (validation.Success)
             {
-
+                await Task.Delay(6000);
             }
             else
             {

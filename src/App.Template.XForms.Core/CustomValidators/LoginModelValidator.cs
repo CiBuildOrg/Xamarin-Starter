@@ -19,9 +19,11 @@ namespace App.Template.XForms.Core.CustomValidators
             RuleFor(x => x.Password).Must(x => !string.IsNullOrEmpty(x))
                 .WithMessage("Password must not be empty");
 
-            RuleFor(x => x.UserName).Must(x => x != null && x.Length >= appSetting.Validation.UsernameMinLength)
+            RuleFor(x => x.UserName).Must(x => x.Length >= appSetting.Validation.UsernameMinLength)
+                .When(x => !string.IsNullOrEmpty(x.UserName))
                 .WithMessage($"Username invalid (more than {appSetting.Validation.UsernameMinLength} chars)");
-            RuleFor(x => x.Password).Must(x => x != null && x.Length >= appSetting.Validation.PasswordMinLength)
+            RuleFor(x => x.Password).Must(x => x.Length >= appSetting.Validation.PasswordMinLength)
+                .When(x => !string.IsNullOrEmpty(x.Password))
                 .WithMessage($"Password invalid (more than {appSetting.Validation.PasswordMinLength} chars)");
         }
     }

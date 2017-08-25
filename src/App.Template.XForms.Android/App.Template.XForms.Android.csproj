@@ -188,6 +188,9 @@
     <PackageReference Include="Autofac">
       <Version>4.6.1</Version>
     </PackageReference>
+    <PackageReference Include="FluentValidation">
+      <Version>7.2.0-beta2</Version>
+    </PackageReference>
     <PackageReference Include="modernhttpclient">
       <Version>2.4.2</Version>
     </PackageReference>
@@ -204,10 +207,10 @@
       <Version>2.1.4</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v4">
-      <Version>25.4.0.1</Version>
+      <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
-      <Version>25.4.0.1</Version>
+      <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Auth">
       <Version>1.5.0.3</Version>

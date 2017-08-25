@@ -1,5 +1,4 @@
 #define ALWAYS_LOAD
-
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;

@@ -3,7 +3,6 @@ using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using App.Template.XForms.Core.Annotations;
-using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,13 +12,14 @@ using FluentValidation.Results;
 
 namespace App.Template.XForms.Core.Utils.Validation
 {
-    public abstract class ValidateableModelBase<T, TK> : INotifyPropertyChanged, INotifyDataErrorInfo, IValidate
-        where T: class where TK : AbstractValidator<T>
+    public abstract class ValidateableModelBase<T> : INotifyPropertyChanged, INotifyDataErrorInfo, IValidate
+        where T: class, INotifyPropertyChanged
     {
-        private readonly ValidationTemplate<ValidateableModelBase<T, TK>, TK> _validationTemplate;
+        private readonly ValidationTemplate<ValidateableModelBase<T>> _validationTemplate;
         protected ValidateableModelBase()
         {
-            _validationTemplate = new ValidationTemplate<ValidateableModelBase<T, TK>, TK>(this);
+            var type = GetType();
+            _validationTemplate = new ValidationTemplate<ValidateableModelBase<T>>(this, type);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

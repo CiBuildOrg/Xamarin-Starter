@@ -8,18 +8,20 @@ using MvvmCross.Platform;
 
 namespace App.Template.XForms.Core.Utils.Validation
 {
-    public class ValidationTemplate<T, TK> :
+    public class ValidationTemplate<T> :
         INotifyDataErrorInfo
         where T : class, INotifyPropertyChanged 
     {
         private readonly INotifyPropertyChanged _target;
-        private readonly IValidator<TK> _validator;
+        private readonly IValidator _validator;
         private ValidationResult _validationResult;
 
-        public ValidationTemplate(T target)
+        public ValidationTemplate(T target, Type type)
         {
             _target = target;
-            _validator = Mvx.Resolve<AbstractValidator<TK>>();
+
+            // ninja shit here
+            _validator = Mvx.Resolve<IValidatorFactory>().GetValidator(type);
             _validationResult = _validator.Validate(target);
             target.PropertyChanged += Validate;
         }

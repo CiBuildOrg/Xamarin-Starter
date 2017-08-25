@@ -1,9 +1,7 @@
 ﻿using App.Template.XForms.Core.Extensions;
 using App.Template.XForms.Core.Forms.Behaviors;
 using System;
-using System.Threading;
-using App.Template.XForms.Core.Models;
-using App.Template.XForms.Core.ViewModels;
+using System.Diagnostics.CodeAnalysis;
 using Xamarin.Forms.Xaml;
 
 namespace App.Template.XForms.Core.Views
@@ -12,30 +10,12 @@ namespace App.Template.XForms.Core.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginView
     {
-        private AuthenticationBehaviour _authenticationBehaviour;
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly AuthenticationBehaviour _authenticationBehaviour;
 
         public LoginView()
         {
-            //_authenticator = authenticator;
-            //_authenticator.Completed += AuthenticatorOnCompleted;
-            //_authenticator.Error += AuthenticatorOnError;
-
             InitializeComponent();
-            //AuthFieldsToEntries();
-            ConfigurePage();
-
             _authenticationBehaviour = ControllerBag.GetBehaviour<AuthenticationBehaviour>();
-        }
-
-        protected void ConfigurePage()
-        {
-        }
-
-        protected override void OnDisappearing()
-        {
-            _cancellationTokenSource.Cancel();
-            base.OnDisappearing();
         }
 
         private async void OnSubmitClicked(object sender, EventArgs e)
@@ -54,11 +34,12 @@ namespace App.Template.XForms.Core.Views
             }
             catch (Exception ex)
             {
-
                 await _authenticationBehaviour.SwitchAuthState(AuthenticationBehaviour.AuthState.Fail, ex.Message);
             }
         }
 
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private async void OnCancelClicked(object sender, EventArgs e)
         {
             await _authenticationBehaviour.SwitchAuthState(AuthenticationBehaviour.AuthState.Fail, "User closed");
@@ -99,10 +80,10 @@ namespace App.Template.XForms.Core.Views
         //    }
         //}
 
-        protected override bool OnBackButtonPressed()
-        {
-            OnCancelClicked(this, EventArgs.Empty);
-            return base.OnBackButtonPressed();
-        }
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    //OnCancelClicked(this, EventArgs.Empty);
+        //    return base.OnBackButtonPressed();
+        //}
     }
 }

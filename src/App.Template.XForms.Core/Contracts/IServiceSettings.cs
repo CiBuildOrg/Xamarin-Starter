@@ -4,6 +4,5 @@
     {
         string ServiceId { get; }
         string Version { get; }
-        bool SetupFinished { get; }
     }
 }

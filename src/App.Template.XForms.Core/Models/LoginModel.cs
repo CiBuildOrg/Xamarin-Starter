@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using App.Template.XForms.Core.Utils.Validation;
+﻿using App.Template.XForms.Core.Utils.Validation;
 using FluentValidation;
 
 namespace App.Template.XForms.Core.Models
@@ -9,6 +8,10 @@ namespace App.Template.XForms.Core.Models
         public LoginModelValidator()
         {
             // rules here
+            RuleFor(x => x.UserName).Must(x => !string.IsNullOrEmpty(x)).WithMessage("Username must not be empty");
+            RuleFor(x => x.Password).Must(x => !string.IsNullOrEmpty(x)).WithMessage("Password must not be empty");
+            RuleFor(x => x.UserName).Must(x => x.Length >= 3).WithMessage("Username invalid (more than 3 chars)");
+            RuleFor(x => x.Password).Must(x => x.Length >= 3).WithMessage("Password invalid (more than 3 chars)");
         }
     }
 

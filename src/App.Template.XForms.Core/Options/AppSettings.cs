@@ -21,6 +21,7 @@ namespace App.Template.XForms.Core.Options
         public string Version { get; set; }
         public BackendHost Identity { get; set; }
         public Security Security { get; set; }
+        public Validation Validation { get; set; }
 
         private readonly IKeyValueStore _store;
         private readonly IServiceSettings _keyProvider;
@@ -49,12 +50,17 @@ namespace App.Template.XForms.Core.Options
             {
                 if (_keyProvider.Version != settings.Version)
                 {
+                    var setupFinished = settings.SetupFinished;
+
                     if (ResourceKeys.IsDebug)
                     {
                         await Destroy();
                     }
 
                     LoadFromRessource();
+
+                    SetupFinished = setupFinished;
+
                     await Persist();
                 }
                 else
@@ -64,6 +70,7 @@ namespace App.Template.XForms.Core.Options
                     Identity = settings.Identity;
                     Version = settings.Version;
                     Security = settings.Security;
+                    Validation = settings.Validation;
                 }
             }
             else
@@ -83,25 +90,33 @@ namespace App.Template.XForms.Core.Options
                 throw new Exception("Could not read settings json file");
             //App
             var appToken = intermediate["App"];
-            ServiceId = (string)appToken["ServiceId"];
-            SetupFinished = (bool)appToken["SetupFinished"];
+            ServiceId = (string) appToken["ServiceId"];
+            SetupFinished = (bool) appToken["SetupFinished"];
 
             //Backend
             var backendTokenIdentity = intermediate["Backend"]["Identity"];
             Identity = new BackendHost
             {
-                Host = (string)backendTokenIdentity["Host"],
-                Port = (int)backendTokenIdentity["Port"],
-                Secure = (bool)backendTokenIdentity["Secure"],
-                TimeOut = (int)backendTokenIdentity["TimeOut"],
-                ClientId = (string)backendTokenIdentity["ClientId"],
-                ClientSecret = (string)backendTokenIdentity["ClientSecret"]
+                Host = (string) backendTokenIdentity["Host"],
+                Port = (int) backendTokenIdentity["Port"],
+                Secure = (bool) backendTokenIdentity["Secure"],
+                TimeOut = (int) backendTokenIdentity["TimeOut"],
+                ClientId = (string) backendTokenIdentity["ClientId"],
+                ClientSecret = (string) backendTokenIdentity["ClientSecret"]
             };
 
             var security = intermediate["Security"];
             Security = new Security
             {
-                StorePassword = (string)security["StorePassword"]
+                StorePassword = (string) security["StorePassword"]
+            };
+
+            var validation = intermediate["Validation"];
+            Validation = new Validation
+            {
+                PasswordMinLength = (int) validation["PasswordMinLength"],
+                UsernameIsEmail = (bool) validation["UsernameIsEmail"],
+                UsernameMinLength = (int) validation["UsernameMinLength"]
             };
         }
 

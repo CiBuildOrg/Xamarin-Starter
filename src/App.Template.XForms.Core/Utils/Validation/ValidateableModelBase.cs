@@ -57,13 +57,12 @@ namespace App.Template.XForms.Core.Utils.Validation
 
             foreach (var propertyDefinition in properties)
             {
-                if (propertyDefinition.GetCustomAttribute<ValidateableAttribute>() != null)
+                if (propertyDefinition.GetCustomAttribute<ValidateableAttribute>() == null) continue;
+
+                var errors = _validationTemplate.GetErrors(propertyDefinition.Name).Cast<string>().ToList();
+                if (errors.Any())
                 {
-                    var errors = _validationTemplate.GetErrors(propertyDefinition.Name).Cast<string>().ToList();
-                    if (errors.Any())
-                    {
-                          errors.ForEach(x => result.Failures.Add(new ValidationFailure(propertyDefinition.Name, x)));
-                    }
+                    errors.ForEach(x => result.Failures.Add(new ValidationFailure(propertyDefinition.Name, x)));
                 }
             }
 

@@ -94,14 +94,14 @@
                     <ContentView Padding="0, 10, 0, 0">
                         <Entry x:Name="UsernameEntry" Keyboard="Text" Placeholder="Username">
                             <Entry.Behaviors>
-                                <behaviours:EntrySanityBehaviour x:Name="UserNameEntryBehavior" MinCharLength="3" DoRemoveWhiteSpace="True" CheckIsEmail="False" FailOnEmtpyEntry="True"/>
+                                <behaviours:EntrySanityBehaviour x:Name="UserNameEntryBehavior" DoRemoveWhiteSpace="True" />
                             </Entry.Behaviors>
                         </Entry>
                     </ContentView>
                     <ContentView Padding="0, 10, 0, 0">
                         <Entry x:Name="PasswordEntry" Keyboard="Text" Placeholder="Password" IsPassword="True">
                             <Entry.Behaviors>
-                                <behaviours:EntrySanityBehaviour x:Name="PasswordEntryBehavior" MinCharLength="3" DoRemoveWhiteSpace="True" CheckIsEmail="False" FailOnEmtpyEntry="True" />
+                                <behaviours:EntrySanityBehaviour x:Name="PasswordEntryBehavior" DoRemoveWhiteSpace="True" />
                             </Entry.Behaviors>
                         </Entry>
                     </ContentView>

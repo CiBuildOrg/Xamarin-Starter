@@ -1,34 +1,23 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace App.Template.XForms.Core.Forms.Behaviors
 {
-    public interface IEntryValidator
+    public class EntrySanityBehaviour : Behavior<Entry>
     {
-        Tuple<bool, string> Validate();
-    }
-
-    public class EntrySanityBehaviour : Behavior<Entry>, IEntryValidator
-    {
-        public bool FailOnEmtpyEntry { get; set; }
-        public bool CheckIsEmail { get; set; }
         public bool DoRemoveWhiteSpace { get; set; }
-        public int MinCharLength { get; set; }
-
-        private Entry context;
+        private Entry _context;
 
         protected override void OnAttachedTo(Entry bindable)
         {
-            base.OnAttachedTo(context);
-            context = bindable;
-            context.TextChanged += OnTextChanged;
+            base.OnAttachedTo(_context);
+            _context = bindable;
+            _context.TextChanged += OnTextChanged;
         }
 
         protected override void OnDetachingFrom(Entry bindable)
         {
-            context.TextChanged -= OnTextChanged;
-            base.OnDetachingFrom(context);
+            _context.TextChanged -= OnTextChanged;
+            base.OnDetachingFrom(_context);
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
@@ -37,43 +26,9 @@ namespace App.Template.XForms.Core.Forms.Behaviors
                 RemoveWhiteSpace(e.NewTextValue);
         }
 
-        private bool CheckInputIsEmail()
-        {
-            return Regex.IsMatch(context.Text, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-        }
-
         private void RemoveWhiteSpace(string input)
         {
-            context.Text = input.Replace(" ", "");
-        }
-
-        public Tuple<bool, string> Validate()
-        {
-            var valid = true;
-            var message = string.Empty;
-
-            if (FailOnEmtpyEntry)
-            {
-                if (string.IsNullOrWhiteSpace(context.Text))
-                {
-                    valid = false;
-                    message = $"{context.Placeholder} can not be empty.";
-                }
-            }
-
-            if (valid && context.Text.Length < this.MinCharLength)
-            {
-                valid = false;
-                message = $"{context.Placeholder} must be at least {this.MinCharLength} characters long.";
-            }
-
-            if (valid && CheckIsEmail && !CheckInputIsEmail())
-            {
-                valid = false;
-                message = "Invalid email address.";
-            }
-
-            return new Tuple<bool, string>(valid, message);
+            _context.Text = input.Replace(" ", "");
         }
     }
 }

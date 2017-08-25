@@ -6,6 +6,7 @@ namespace App.Template.XForms.Core.Options
     {
         public string ServiceId { get; }
         public string Version { get; }
+        public bool SetupFinished { get; }
 
         public ServiceSettings()
         {
@@ -13,7 +14,8 @@ namespace App.Template.XForms.Core.Options
             //App
             var appToken = obj["App"];
             ServiceId = (string)appToken["ServiceId"];
-            Version = (string)appToken["Version"];  
+            Version = (string)appToken["Version"];
+            SetupFinished = (bool) appToken["SetupFinished"];
         }
     }
 }

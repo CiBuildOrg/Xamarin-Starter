@@ -206,6 +206,9 @@
     <PackageReference Include="PropertyChanged.Fody">
       <Version>2.1.4</Version>
     </PackageReference>
+    <PackageReference Include="Validar.Fody">
+      <Version>1.5.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v4">
       <Version>25.4.0.2</Version>
     </PackageReference>

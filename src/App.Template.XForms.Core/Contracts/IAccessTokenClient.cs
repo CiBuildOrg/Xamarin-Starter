@@ -19,4 +19,5 @@ namespace App.Template.XForms.Core.Contracts
         Task<AccessToken> RefreshToken(string refreshToken);
         Task<AccessToken> RefreshToken(string refreshToken, CancellationToken cancellationToken);
     }
+
 }

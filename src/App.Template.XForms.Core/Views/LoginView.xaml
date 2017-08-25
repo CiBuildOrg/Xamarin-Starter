@@ -92,14 +92,14 @@
 
                 <StackLayout x:Name="InputEntryContainer">
                     <ContentView Padding="0, 10, 0, 0">
-                        <Entry x:Name="UsernameEntry" Keyboard="Text" Placeholder="Username">
+                        <Entry x:Name="UsernameEntry" Keyboard="Text" Placeholder="Username" Text="{Binding LoginModel.UserName}">
                             <Entry.Behaviors>
                                 <behaviours:EntrySanityBehaviour x:Name="UserNameEntryBehavior" DoRemoveWhiteSpace="True" />
                             </Entry.Behaviors>
                         </Entry>
                     </ContentView>
                     <ContentView Padding="0, 10, 0, 0">
-                        <Entry x:Name="PasswordEntry" Keyboard="Text" Placeholder="Password" IsPassword="True">
+                        <Entry x:Name="PasswordEntry" Keyboard="Text" Placeholder="Password" IsPassword="True" Text="{Binding LoginModel.Password}">
                             <Entry.Behaviors>
                                 <behaviours:EntrySanityBehaviour x:Name="PasswordEntryBehavior" DoRemoveWhiteSpace="True" />
                             </Entry.Behaviors>

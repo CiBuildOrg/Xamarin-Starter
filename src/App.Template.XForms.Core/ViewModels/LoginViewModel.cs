@@ -23,10 +23,7 @@ namespace App.Template.XForms.Core.ViewModels
         {
             return new AuthPageConfiguration
             {
-                Title = Texts.AuthPageTitle,
                 SubTitle = Texts.AuthPageSubtitle,
-                ShowCloseButton = false,
-                ShowHeader = false,
                 ShowRegistrationButton = false
             };
         }

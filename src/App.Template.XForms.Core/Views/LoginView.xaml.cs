@@ -37,13 +37,13 @@ namespace App.Template.XForms.Core.Views
             base.OnAppearing();
 
             _loginStartSubscriptionToken =
-                _messenger.SubscribeOnThreadPoolThread<StartLoginMessage>(OnStart);
+                _messenger.SubscribeOnMainThread<StartLoginMessage>(async x => await SignalStart());
 
             _loginSuccessSubscriptionToken =
-                _messenger.SubscribeOnThreadPoolThread<LoginSuccessMessage>(OnLoginSuccess);
+                _messenger.SubscribeOnMainThread<LoginSuccessMessage>(async x => await SignalSuccess());
 
             _loginFailureSubscriptionToken =
-                _messenger.SubscribeOnThreadPoolThread<LoginFailureMessage>(OnLoginFailure);
+                _messenger.SubscribeOnMainThread<LoginFailureMessage>(async x => await SignalFailure(x.ErrorMessage));
         }
 
         protected override void OnDisappearing()
@@ -53,21 +53,6 @@ namespace App.Template.XForms.Core.Views
             _messenger.Unsubscribe<LoginFailureMessage>(_loginFailureSubscriptionToken);
 
             base.OnDisappearing();
-        }
-
-        private void OnLoginSuccess(LoginSuccessMessage message)
-        {
-            SignalSuccess().WaitAsync();
-        }
-
-        private void OnLoginFailure(LoginFailureMessage message)
-        {
-            SignalFailure(message.ErrorMessage).WaitAsync();
-        }
-
-        private void OnStart(StartLoginMessage message)
-        {
-            SignalStart().WaitAsync();
         }
 
         private async Task SignalSuccess()

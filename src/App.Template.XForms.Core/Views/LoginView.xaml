@@ -12,10 +12,9 @@
                                         Property=Height,
                                         Factor=0.5}">
             <RelativeLayout.Behaviors>
-                <behaviours:TopGroupBehaviour Title="{x:Reference HeaderTitle}"
+                <behaviours:TopGroupBehaviour 
               TitleLabel="{x:Reference HeaderMessage}"
-              TopIcon="{x:Reference HeroIcon}"
-              CloseIcon="{x:Reference CloseIcon}" />
+              TopIcon="{x:Reference HeroIcon}" />
 
             </RelativeLayout.Behaviors>
             <BoxView WidthRequest="37" HeightRequest="37" Color="#3789C6" Rotation="45"
@@ -29,27 +28,6 @@
         ElementName=Top, 
         Factor=0.5, 
         Constant=-18}" />
-            <Image x:Name="CloseIcon" WidthRequest="28" HeightRequest="28" IsVisible="{Binding LoginConfig.ShowCloseButton}"
-             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
-             ElementName=Top,
-             Property=Height,
-             Factor=0.02}"
-             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
-             ElementName=Top,
-             Property=Width,
-             Factor=0.05}">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnCancelClicked" />
-                </Image.GestureRecognizers>
-            </Image>
-            <Label x:Name="HeaderTitle" TextColor="White" FontSize="28" HorizontalOptions="Center" IsVisible="{Binding LoginConfig.ShowHeader}"
-             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Top, Property=Width, Factor=1}"
-             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
-             ElementName=Top,
-             Property=Height,
-             Factor=0.025}"
-             Text="{Binding LoginConfig.Title}" />
-
             <Image AnchorY="0.13" HeightRequest="160" WidthRequest="160" x:Name="HeroIcon"
              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
              ElementName=Top,

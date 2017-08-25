@@ -5,12 +5,9 @@ namespace App.Template.XForms.Core.Forms.Behaviors
 {
     internal class TopGroupBehaviour : Behavior<View>
     {
-        public Label Title { get; set; }
         public Label TitleLabel { get; set; }
         public Image TopIcon { get; set; }
-        public Image CloseIcon { get; set; }
 
-        private readonly ImageSource _closeIconImage;
         private readonly ImageSource _heroImageDefault;
         private readonly ImageSource _heroImageSuccess;
 
@@ -18,7 +15,6 @@ namespace App.Template.XForms.Core.Forms.Behaviors
 
         public TopGroupBehaviour()
         {
-            _closeIconImage = ImageSource.FromResource(Assets.Path.CloseIconImage);
             _heroImageDefault = ImageSource.FromResource(Assets.Path.HeroImageDefault);
             _heroImageSuccess = ImageSource.FromResource(Assets.Path.HeroImageSuccess);
         }
@@ -32,50 +28,29 @@ namespace App.Template.XForms.Core.Forms.Behaviors
 
         public async Task ViewStart(int delay = 350)
         {
-            CloseIcon.Opacity = 0;
-            CloseIcon.Source = _closeIconImage;
             TopIcon.Opacity = 0;
             TopIcon.Source = _heroImageDefault;
             TopIcon.TranslationY -= TopIcon.HeightRequest * 0.25;
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            Device.OnPlatform(Android: () =>
-            {
-            },
-            iOS: () =>
-            {
-                CloseIcon.TranslationY += 21;
-                Title.TranslationY += 21;
-            });
-#pragma warning restore CS0618 // Type or member is obsolete
-
             await Task.Delay(delay);
 
             await Task.WhenAll(
-                DropInCard(1250),
-                CloseIcon.FadeTo(1, 1000)
+                DropInCard(1250)
             );
         }
 
         public async Task SwitchStateToDefault()
         {
-            Title.Text = "Authenticate";
-
             await FlipImageTo(_heroImageDefault);
         }
 
         public async Task SwitchStateToBusy()
         {
-            Title.Text = "Authenticating…";
-
             if (TopIcon.Source != _heroImageDefault)
                 await FlipImageTo(_heroImageDefault);
         }
 
         public async Task SwitchStateToSuccess()
         {
-            Title.Text = "Authenticated!";
-
             await Task.WhenAll(
                 FlipImageTo(_heroImageSuccess),
                 FillScreen()
@@ -125,15 +100,11 @@ namespace App.Template.XForms.Core.Forms.Behaviors
             var height = Application.Current.MainPage.Height;
 
             await Task.WhenAll(
-                Title.TranslateTo(0, 45, 300),
                 TopIcon.TranslateTo(0, height / 8, 500),
                 TopIcon.ScaleTo(1.5, 500),
-                CloseIcon.FadeTo(0, 300),
                 TitleLabel.FadeTo(0, 300),
                 _rootView.LayoutTo(Rectangle.FromLTRB(0, 0, width, height), 800, Easing.SinIn)
             );
-
-            CloseIcon.IsEnabled = false;
         }
     }
 }

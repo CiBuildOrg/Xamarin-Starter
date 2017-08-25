@@ -108,7 +108,7 @@
                 </StackLayout>
 
                 <ContentView Padding="0, 10, 0, 0">
-                    <Button x:Name="LoginButton" WidthRequest="120" Clicked="OnSubmitClicked" BackgroundColor="#b42644"
+                    <Button x:Name="LoginButton" WidthRequest="120"  BackgroundColor="#b42644"
                   Text="Log in" TextColor="WhiteSmoke" Command="{Binding SubmitCommand}" />
                 </ContentView>
                 <ContentView Padding="0, 10, 0, 0">

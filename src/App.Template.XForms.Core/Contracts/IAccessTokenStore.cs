@@ -7,8 +7,8 @@ namespace App.Template.XForms.Core.Contracts
     public interface IAccessTokenStore
     {
         Task<bool> HasAccessToken(string clientId, string serviceId, CancellationToken cancellationToken);
-        Task<AccessToken> GetClientAccessToken(string clientId, string serviceId, CancellationToken cancellationToken);
-        Task<AccessToken> GetUserAccessToken(string username, string serviceId, CancellationToken cancellationToken);
+        Task<GetAccessTokenResponse> GetClientAccessToken(string clientId, string serviceId, CancellationToken cancellationToken);
+        Task<GetAccessTokenResponse> GetUserAccessToken(string username, string serviceId, CancellationToken cancellationToken);
 
         Task SaveClientAccessToken(string clientId, string serviceId, AccessToken accessToken,
             CancellationToken cancellationToken);

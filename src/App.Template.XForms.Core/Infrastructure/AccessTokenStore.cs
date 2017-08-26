@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace App.Template.XForms.Core.Infrastructure
     /// A store to securely store <see cref="AccessToken"/> instances in. This class acts as a wrapper around
     /// the <see cref="AccountStore"/> class, which is where the actual storage takes place.
     /// </summary>
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class AccessTokenStore : IAccessTokenStore
     {
         private const string NormalizedUsernamePrefix = "user:";
@@ -42,7 +44,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <exception cref="System.ArgumentNullException">username
         /// or
         /// serviceId</exception>
-        public async Task<AccessToken> GetUserAccessToken(string username, string serviceId,
+        public async Task<GetAccessTokenResponse> GetUserAccessToken(string username, string serviceId,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(username, "username");
@@ -74,7 +76,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <exception cref="System.ArgumentNullException">clientId
         /// or
         /// serviceId</exception>
-        public async Task<AccessToken> GetClientAccessToken(string clientId, string serviceId,
+        public async Task<GetAccessTokenResponse> GetClientAccessToken(string clientId, string serviceId,
             CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(clientId, "clientId");
@@ -117,14 +119,32 @@ namespace App.Template.XForms.Core.Infrastructure
             await SaveAccessToken(NormalizeClientId(clientId), serviceId, accessToken, cancellationToken).ConfigureAwait(false);
         }
 
-        private async Task<AccessToken> GetAccessToken(string normalizedUsername, string serviceId,
+        private async Task<GetAccessTokenResponse> GetAccessToken(string normalizedUsername, string serviceId,
             CancellationToken cancellationToken)
         {
             return await Task.Factory.StartNew(() =>
             {
                 var account = _accountStore.FindAccountsForService(serviceId).FirstOrDefault(a => string.Equals(a.Username, normalizedUsername,
                         StringComparison.CurrentCultureIgnoreCase));
-                return account == null ? null : new AccessToken(account.Properties);
+
+                if (account == null)
+                {
+                    return new GetAccessTokenResponse
+                    {
+                        AccessToken = null,
+                        Error = new ErrorResult
+                        {
+                            Error = "tokennotfound",
+                            ErrorDescription = "Login information not found"
+                        }
+                    };
+                }
+
+                return new GetAccessTokenResponse
+                {
+                    AccessToken = new AccessToken(account.Properties),
+                    Error = null
+                };
             }, cancellationToken).ConfigureAwait(false);
         }
 

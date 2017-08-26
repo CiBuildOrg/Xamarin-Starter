@@ -8,6 +8,7 @@ using App.Template.XForms.Core.Utils.Auth;
 namespace App.Template.XForms.Core.Infrastructure.Services
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IAccessTokenStore _accessTokenStore;

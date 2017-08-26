@@ -9,12 +9,20 @@ using Validation;
 
 namespace App.Template.XForms.Core.Utils.Auth.Requests
 {
+    public class CallResult
+    {
+        public string Content { get; set; }
+        public bool IsSuccess { get; set; }
+    }
+
+
+
     /// <summary>
     /// This class represents a OAuth 2.0 token request.
     /// </summary>
     internal abstract class TokenRequest
     {
-        public async Task<string> MakeCall(string tokensUri, CancellationToken cancellationToken)
+        public async Task<CallResult> MakeCall(string tokensUri, CancellationToken cancellationToken)
         {
             Requires.NotNull(tokensUri, "tokensUri");
       
@@ -29,17 +37,33 @@ namespace App.Template.XForms.Core.Utils.Auth.Requests
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
+                    var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return new CallResult
+                    {
+                        Content = content,
+                        IsSuccess = true
+                    };
                 }
-                if (response.StatusCode == HttpStatusCode.RequestTimeout)
+
+                switch (response.StatusCode)
                 {
-                    throw new HttpException((int)HttpStatusCode.RequestTimeout,
-                        "The request was aborted.");
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        return new CallResult
+                        {
+                            Content = content,
+                            IsSuccess = false
+                        };
+                        // deserialize error middleware
+                    case HttpStatusCode.RequestTimeout:
+                        throw new HttpException((int)HttpStatusCode.RequestTimeout,
+                            "The request was aborted.");
+                    default:
+                        throw new Exception("Could not make call");
+
                 }
             }
-
-            throw new Exception("Could not make call");
         }
 
         /// <summary>

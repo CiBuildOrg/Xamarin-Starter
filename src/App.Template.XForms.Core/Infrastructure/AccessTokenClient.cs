@@ -38,7 +38,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the client credentials grant workflow (http://tools.ietf.org/html/rfc6749#section-4.4)
         /// </remarks>
-        public async Task<AccessToken> GetClientAccessToken(string scope)
+        public async Task<TokenResponse> GetClientAccessToken(string scope)
         {
             return await GetClientAccessToken(scope, CancellationToken.None).ConfigureAwait(false);
         }
@@ -52,7 +52,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the client credentials grant workflow (http://tools.ietf.org/html/rfc6749#section-4.4)
         /// </remarks>
-        public async Task<AccessToken> GetClientAccessToken(string scope, CancellationToken cancellationToken)
+        public async Task<TokenResponse> GetClientAccessToken(string scope, CancellationToken cancellationToken)
         {
             return await ExecuteAccessTokenRequest(
                 new ClientCredentialsGrantTokenRequest(_serverConfiguration.ClientId, _serverConfiguration.ClientSecret,
@@ -70,7 +70,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the resource owner password credentials grant workflow (http://tools.ietf.org/html/rfc6749#section-4.3)
         /// </remarks>
-        public async Task<AccessToken> GetUserAccessToken(string username, string password, string scope,
+        public async Task<TokenResponse> GetUserAccessToken(string username, string password, string scope,
             Dictionary<string, string> extra = null)
         {
             return await GetUserAccessToken(username, password, scope, CancellationToken.None, extra).ConfigureAwait(false);
@@ -88,7 +88,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the resource owner password credentials grant workflow (http://tools.ietf.org/html/rfc6749#section-4.3)
         /// </remarks>
-        public async Task<AccessToken> GetUserAccessToken(string username, string password, string scope,
+        public async Task<TokenResponse> GetUserAccessToken(string username, string password, string scope,
             CancellationToken cancellationToken, Dictionary<string, string> extra = null)
         {
             Requires.NotNullOrEmpty(username, "username");
@@ -108,7 +108,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the refresh access token workflow (http://tools.ietf.org/html/rfc6749#section-6)
         /// </remarks>
-        public async Task<AccessToken> RefreshToken(string refreshToken)
+        public async Task<TokenResponse> RefreshToken(string refreshToken)
         {
             return await RefreshToken(refreshToken, CancellationToken.None).ConfigureAwait(false);
         }
@@ -122,7 +122,7 @@ namespace App.Template.XForms.Core.Infrastructure
         /// <remarks>
         /// This method implements the refresh access token workflow (http://tools.ietf.org/html/rfc6749#section-6)
         /// </remarks>
-        public async Task<AccessToken> RefreshToken(string refreshToken, CancellationToken cancellationToken)
+        public async Task<TokenResponse> RefreshToken(string refreshToken, CancellationToken cancellationToken)
         {
             Requires.NotNullOrEmpty(refreshToken, "refreshToken");
 
@@ -131,22 +131,46 @@ namespace App.Template.XForms.Core.Infrastructure
                     _serverConfiguration.ClientSecret), cancellationToken).ConfigureAwait(false);
         }
 
-        private async Task<AccessToken> ExecuteAccessTokenRequest(TokenRequest tokenRequest,
+        private async Task<TokenResponse> ExecuteAccessTokenRequest(TokenRequest tokenRequest,
             CancellationToken cancellationToken)
         {
             var url = _serverConfiguration.BaseUrl  + _serverConfiguration.TokensUrl;
             var content = await tokenRequest.MakeCall(url, cancellationToken).ConfigureAwait(false);
+            var isSuccessContent = content.IsSuccess;
 
-            // convert string to stream
-            var byteArray = Encoding.UTF8.GetBytes(content);
-            using (var stream = new MemoryStream(byteArray))
+            if (!isSuccessContent)
+            {
+                var errorContentArray = Encoding.UTF8.GetBytes(content.Content);
+                using (var stream = new MemoryStream(errorContentArray))
+                {
+                    using (var streamReader = new StreamReader(stream))
+                    {
+                        var serializer = new JsonSerializer();
+                        var error = serializer.Deserialize<ErrorResult>(new JsonTextReader(streamReader));
+
+                        return new TokenResponse
+                        {
+                            AccessToken = null,
+                            Error = error
+                        };
+                    }
+                }
+            
+            }
+
+            var successContentArray = Encoding.UTF8.GetBytes(content.Content);
+            using (var stream = new MemoryStream(successContentArray))
             {
                 using (var streamReader = new StreamReader(stream))
                 {
                     var serializer = new JsonSerializer();
                     var accessTokenResponse = serializer.Deserialize<AccessTokenResponse>(new JsonTextReader(streamReader));
-
-                    return accessTokenResponse.ToAccessToken();
+                    var accessToken = accessTokenResponse.ToAccessToken();
+                    return new TokenResponse
+                    {
+                        AccessToken = accessToken,
+                        Error = null
+                    };
                 }
             }
         }

@@ -30,7 +30,9 @@ namespace App.Template.XForms.Android
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App(Mvx.Resolve<IAppSettings>());
+            var appSettings = Mvx.Resolve<IAppSettings>();
+            var app = new Core.App(appSettings);
+            return app;
         }
         
         protected override IMvxTrace CreateDebugTrace()

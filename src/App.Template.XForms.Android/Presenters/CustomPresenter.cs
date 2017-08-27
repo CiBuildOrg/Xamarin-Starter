@@ -86,8 +86,7 @@ namespace App.Template.XForms.Android.Presenters
                 try
                 {
                     // check for modal presentation parameter
-                    string modalParameter;
-                    if (request.PresentationValues != null && request.PresentationValues.TryGetValue(ModalPresentationParameter, out modalParameter) && bool.Parse(modalParameter))
+                    if (request.PresentationValues != null && request.PresentationValues.TryGetValue(ModalPresentationParameter, out string modalParameter) && bool.Parse(modalParameter))
                         mainPage.Navigation.PushModalAsync(page);
                     else
                         // calling this sync blocks UI and never navigates hence code continues regardless here
@@ -107,8 +106,7 @@ namespace App.Template.XForms.Android.Presenters
         {
             if (HandlePresentationChange(hint)) return;
 
-            var presentationHint = hint as MvxClosePresentationHint;
-            if (presentationHint != null)
+            if (hint is MvxClosePresentationHint presentationHint)
             {
                 var closePresentationHint = presentationHint;
 
@@ -135,8 +133,7 @@ namespace App.Template.XForms.Android.Presenters
 
         private static void SetupMasterDetailForBinding(BindableObject page, IMvxViewModel viewModel, MvxViewModelRequest request)
         {
-            var contentPage = page as IMvxContentPage;
-            if (contentPage != null)
+            if (page is IMvxContentPage contentPage)
             {
                 contentPage.Request = request;
                 contentPage.ViewModel = viewModel;

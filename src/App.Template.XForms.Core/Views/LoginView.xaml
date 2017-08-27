@@ -13,14 +13,16 @@
                                         Factor=0.5}">
             <RelativeLayout.Behaviors>
                 <behaviours:TopGroupBehaviour 
-              TitleLabel="{x:Reference HeaderMessage}"
-              TopIcon="{x:Reference HeroIcon}" />
+              TTitle="{x:Reference HeaderTitle}"
+                    TitleLabel="{x:Reference HeaderMessage}"
+                    TopIcon="{x:Reference HeroIcon}"
+                    CloseIcon="{x:Reference CloseIcon}" />
 
             </RelativeLayout.Behaviors>
             <BoxView WidthRequest="37" HeightRequest="37" Color="#3789C6" Rotation="45"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, 
                Property=Height, 
-               ElementName=Top, 
+               ElementNameTop, 
                Factor=1, 
                Constant=-18}"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, 
@@ -28,6 +30,25 @@
         ElementName=Top, 
         Factor=0.5, 
         Constant=-18}" />
+            <Image x:Name="CloseIcon" WidthRequest="28" HeightRequest="28" IsVisible="False"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.02}"
+                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=0.05}"/>
+            <Label x:Name="HeaderTitle" TextColor="White" FontSize="28" HorizontalOptions="Center" IsVisible="False"
+                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Width,
+             Factor=1}"
+                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+             ElementName=Top,
+             Property=Height,
+             Factor=0.025}"
+                   Text="Authenticate" />
             <Image AnchorY="0.13" HeightRequest="160" WidthRequest="160" x:Name="HeroIcon"
              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
              ElementName=Top,
@@ -83,6 +104,13 @@
                             </Entry.Behaviors>
                         </Entry>
                     </ContentView>
+                </StackLayout>
+
+                <StackLayout Padding="0, 5, 0, 0" Orientation="Horizontal" IsVisible="False">
+                    <ContentView VerticalOptions="Center" WidthRequest="120">
+                        <Label Text="Remember me" />
+                    </ContentView>
+                    <Switch x:Name="InputRememberMe" HorizontalOptions="EndAndExpand" IsToggled="True" />
                 </StackLayout>
 
                 <ContentView Padding="0, 10, 0, 0">

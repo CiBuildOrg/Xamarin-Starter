@@ -42,15 +42,6 @@ namespace App.Template.XForms.Core.Forms.Behaviors
             await FormGroup.FadeTo(1, 850, Easing.CubicIn);
         }
 
-        private async Task ViewDone()
-        {
-            await Task.WhenAll(
-                _topGroupBehaviour.SwitchStateToSuccess(),
-                FormGroup.FadeTo(0, 400, Easing.SinIn),
-                FormGroup.TranslateTo(0, 1000, 600, Easing.SinIn)
-            );
-        }
-
         public async Task SwitchAuthState(AuthState state)
         {
             LoadingIndicator.IsRunning = false;

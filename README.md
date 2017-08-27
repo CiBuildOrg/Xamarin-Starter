@@ -1,6 +1,7 @@
 # Xamarin boilerplate 
 
 This will serve as a general base for creating a Xamarin Application in .NET. 
+Fair warning: this is currently under development so you'll see commented code and sometimes hacks until I build this to a final level of quality. 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Deployment notes on how to deploy this on real devices will come later.

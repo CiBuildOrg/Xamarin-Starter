@@ -44,6 +44,11 @@ namespace App.Template.XForms.Core.Options
 
         public async void Start()
         {
+            if (ResourceKeys.IsDebug)
+            {
+                await Destroy();
+            }
+
             var settings = _store.GetObservable<AppSettings>(nameof(AppSettings)).Wait();
             if (settings != null)
             {

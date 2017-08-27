@@ -4,17 +4,18 @@ using System.Reflection;
 using App.Template.XForms.Core.ViewModels.Base;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.ViewModels;
+using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
+using UIKit;
 using Xamarin.Forms;
 
-namespace App.Template.XForms.Android.Presenters
+namespace App.Template.XForms.iOS.Presenters
 {
     [SuppressMessage("ReSharper", "ClassWithVirtualMembersNeverInherited.Global")]
-    public class CustomPresenter : MvxViewPresenter, IMvxFormsPagePresenter, IMvxAndroidViewPresenter
+    public class CustomPresenter : MvxViewPresenter, IMvxFormsPagePresenter, IMvxIosViewPresenter
     {
         private const string ModalPresentationParameter = "modal";
 
@@ -43,11 +44,12 @@ namespace App.Template.XForms.Android.Presenters
 
         protected virtual void CustomPlatformInitialization(MasterDetailPage mainPage)
         {
+            _window.RootViewController = mainPage.CreateViewController();
         }
-
 
         protected virtual void CustomPlatformInitialization(NavigationPage mainPage)
         {
+            _window.RootViewController = mainPage.CreateViewController();
         }
 
         private static void SetupPageForBinding(BindableObject page, IMvxViewModel viewModel, MvxViewModelRequest request)
@@ -78,7 +80,7 @@ namespace App.Template.XForms.Android.Presenters
             if (mainPage == null)
             {
                 FormsApplication.MainPage = new NavigationPage(page);
-                mainPage = (NavigationPage) FormsApplication.MainPage;
+                mainPage = (NavigationPage)FormsApplication.MainPage;
                 CustomPlatformInitialization(mainPage);
             }
             else
@@ -262,16 +264,29 @@ namespace App.Template.XForms.Android.Presenters
 
         private static void MasterRootContentPageActivated()
         {
-            var mainPage = Application.Current.MainPage as MasterDetailPage;
+            var mainPage = Xamarin.Forms.Application.Current.MainPage as MasterDetailPage;
             (mainPage?.Master.BindingContext as MvxMasterDetailViewModel)?.RootContentPageActivated();
         }
 
-        public CustomPresenter(MvxFormsApplication formsApplication)
-        {   
+        public CustomPresenter(UIWindow window, MvxFormsApplication formsApplication)
+        {
             FormsApplication = formsApplication
-                ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApp cannot be null");
+                               ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApp cannot be null");
+
+            _window = window;
         }
 
+        private readonly UIWindow _window;
         public MvxFormsApplication FormsApplication { get; set; }
-    }   
+
+        public bool PresentModalViewController(UIViewController controller, bool animated)
+        {
+            return false;
+        }
+
+        public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        {
+
+        }
+    }
 }

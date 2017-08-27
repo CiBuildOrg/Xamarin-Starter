@@ -116,6 +116,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Bootstrap\MethodBindingPluginBootstrap.cs" />
+    <Compile Include="Presenters\CustomPresenter.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Ui\FaButton.cs" />
     <Compile Include="Ui\FontAwesomeHelper.cs" />

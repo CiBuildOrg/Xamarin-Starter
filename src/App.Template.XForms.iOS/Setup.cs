@@ -4,7 +4,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
@@ -17,6 +16,7 @@ using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.iOS.Bootstrap;
+using App.Template.XForms.iOS.Presenters;
 using Autofac;
 using MvvmCross.Platform.IoC;
 using UIKit;
@@ -56,7 +56,7 @@ namespace App.Template.XForms.iOS
             ImageCircleRenderer.Init();
 
             var xamarinFormsApp = new MvxFormsApplication();
-            var presenter = new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
+            var presenter = new CustomPresenter(Window, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             return presenter;
         }

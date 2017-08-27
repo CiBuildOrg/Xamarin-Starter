@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using App.Template.XForms.Core.Contracts;
 using App.Template.XForms.Core.Models;
 using App.Template.XForms.Core.Models.Messages;
 using App.Template.XForms.Core.Resources;
@@ -9,16 +11,20 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Plugins.Messenger;
 
+
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class LoginViewModel : BasePageViewModel
     {
         private readonly IMvxMessenger _messenger;
+        private readonly IAuthenticationService _authenticationService;
 
-        public LoginViewModel(IMvxMessenger messenger, IMvxNavigationService navigationService)  : base(navigationService)
+        public LoginViewModel(IMvxMessenger messenger, IMvxNavigationService navigationService, IAuthenticationService authenticationService)
+            : base(navigationService)
         {
             _messenger = messenger;
+            _authenticationService = authenticationService;
             LoginConfig = LoadConfiguration();
             LoginModel = new LoginModel();
         }
@@ -66,7 +72,16 @@ namespace App.Template.XForms.Core.ViewModels
                 await Task.Delay(6000);
                 // send message
 
-                _messenger.Publish(new LoginSuccessMessage(this, NavigateAway));
+                var tokenResponse = await _authenticationService.GetAccessToken(LoginModel.UserName, LoginModel.Password, CancellationToken.None);
+
+                if (!tokenResponse.HasAccessToken)
+                {
+                    _messenger.Publish(new LoginFailureMessage(this, tokenResponse.Error.ErrorDescription));
+                }
+                else
+                {
+                    _messenger.Publish(new LoginSuccessMessage(this, NavigateAway));
+                }
             }
             else
             {

@@ -13,7 +13,7 @@
                                         Factor=0.5}">
             <RelativeLayout.Behaviors>
                 <behaviours:TopGroupBehaviour 
-              TTitle="{x:Reference HeaderTitle}"
+              Title="{x:Reference HeaderTitle}"
                     TitleLabel="{x:Reference HeaderMessage}"
                     TopIcon="{x:Reference HeroIcon}"
                     CloseIcon="{x:Reference CloseIcon}" />

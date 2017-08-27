@@ -5,7 +5,7 @@ using MvvmCross.Core.Navigation;
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class ThirdViewModel : BasePageViewModel
+    public class ThirdViewModel : BaseMasterPageViewModel<MenuViewModel>
     {
         public ThirdViewModel(IMvxNavigationService navigationService) : base(navigationService)
         {

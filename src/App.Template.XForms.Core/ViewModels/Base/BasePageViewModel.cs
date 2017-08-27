@@ -4,6 +4,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace App.Template.XForms.Core.ViewModels.Base
 {
+    [PageViewModel]
     public abstract class BasePageViewModel : MvxViewModel
     {
         private IMvxNavigationService NavigationService { get; }

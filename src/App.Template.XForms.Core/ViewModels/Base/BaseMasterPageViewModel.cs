@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.ViewModels;
 
 namespace App.Template.XForms.Core.ViewModels.Base
 {
+    [MasterPageViewModel]
     public abstract class BaseMasterPageViewModel<T> : MvxMasterDetailViewModel<T> where T : IMvxViewModel
     {
         private IMvxNavigationService NavigationService { get; }
@@ -14,6 +16,7 @@ namespace App.Template.XForms.Core.ViewModels.Base
             NavigationService = navigationService;
         }
 
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         protected void ClearStackAndShowViewModel<TViewModel>()
             where TViewModel : IMvxViewModel
         {

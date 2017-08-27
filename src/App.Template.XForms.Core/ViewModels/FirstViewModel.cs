@@ -7,7 +7,7 @@ using MvvmCross.Core.ViewModels;
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class FirstViewModel : BasePageViewModel
+    public class FirstViewModel : BaseMasterPageViewModel<MenuViewModel>
     {
         private readonly IInteractiveAlerts _alerts;
         private static int _ctorCount;

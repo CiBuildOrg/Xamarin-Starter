@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using App.Template.XForms.Android.Infrastructure.Interaction;
+using App.Template.XForms.Android.Presenters;
 using App.Template.XForms.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -37,7 +39,7 @@ namespace App.Template.XForms.Android
 
             var mvxFormsApp = new MvxFormsApplication();
             LoadApplication(mvxFormsApp);
-            if (Mvx.Resolve<IMvxViewPresenter>() is MvxFormsDroidMasterDetailPagePresenter presenter)
+            if (Mvx.Resolve<IMvxViewPresenter>() is CustomPresenter presenter)
             {
                 presenter.FormsApplication = mvxFormsApp;
             }
@@ -59,8 +61,6 @@ namespace App.Template.XForms.Android
                     
             //    }
             //}
-
-            //ClearStackAndShowViewModel<LoginViewModel>();
 
             _lifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
             _lifetimeListener.OnCreate(this);

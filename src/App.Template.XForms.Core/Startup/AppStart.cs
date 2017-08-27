@@ -12,7 +12,7 @@ namespace App.Template.XForms.Core.Startup
 
         public void Start(object hint = null)
         {
-            ShowViewModel<MenuViewModel>();
+            ShowViewModel<LoginViewModel>();
         }
 
         #endregion

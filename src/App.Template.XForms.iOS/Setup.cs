@@ -57,7 +57,6 @@ namespace App.Template.XForms.iOS
 
             var xamarinFormsApp = new MvxFormsApplication();
             var presenter = new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
-            //presenter.Show(new MvxViewModelRequest<LoginViewModel>());
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             return presenter;
         }

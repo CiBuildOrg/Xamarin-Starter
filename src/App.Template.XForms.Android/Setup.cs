@@ -12,6 +12,7 @@ using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Reflection;
 using App.Template.XForms.Android.Bootstrap;
+using App.Template.XForms.Android.Presenters;
 using App.Template.XForms.Core.Bootstrapper;
 using App.Template.XForms.Core.Bootstrapper.AutofacBootstrap;
 using App.Template.XForms.Core.Contracts;
@@ -48,7 +49,7 @@ namespace App.Template.XForms.Android
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var presenter = new MvxFormsDroidMasterDetailPagePresenter(new MvxFormsApplication());
+            var presenter = new CustomPresenter(new MvxFormsApplication());
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
             return presenter;
         }

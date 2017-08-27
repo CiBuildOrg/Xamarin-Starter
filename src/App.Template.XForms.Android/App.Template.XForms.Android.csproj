@@ -89,6 +89,7 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MasterDetailApplicationActivity.cs" />
+    <Compile Include="Presenters\CustomPresenter.cs" />
     <Compile Include="Renderers\ButtonTypefaceRenderer.cs" />
     <Compile Include="Renderers\FontUtils.cs" />
     <Compile Include="Renderers\LabelTypefaceRenderer.cs" />

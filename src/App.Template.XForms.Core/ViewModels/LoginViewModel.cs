@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading.Tasks;
 using App.Template.XForms.Core.Models;
 using App.Template.XForms.Core.Models.Messages;
 using App.Template.XForms.Core.Resources;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 
 namespace App.Template.XForms.Core.ViewModels
@@ -58,12 +62,29 @@ namespace App.Template.XForms.Core.ViewModels
                 await Task.Delay(6000);
                 // send message
 
-                _messenger.Publish(new LoginSuccessMessage(this));
+                _messenger.Publish(new LoginSuccessMessage(this, NavigateAway));
             }
             else
             {
                 _messenger.Publish(new LoginFailureMessage(this, validation.Failures.First().ErrorMessage));
             }
+        }
+        private static void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            var presentationBundle =
+                new MvxBundle(new Dictionary<string, string>
+                {
+                    {"NavigationMode", "ClearStack"}
+                });
+
+            Mvx.Resolve<IMvxNavigationService>().Navigate<TViewModel>(presentationBundle);
+        }
+
+        [SuppressMessage("ReSharper", "MemberCanBeMadeStatic.Global")]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public void NavigateAway()
+        {
+            ClearStackAndShowViewModel<MenuViewModel>();
         }
     }
 }

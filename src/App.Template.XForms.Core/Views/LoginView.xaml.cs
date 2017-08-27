@@ -4,6 +4,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using App.Template.XForms.Core.Models.Messages;
+using App.Template.XForms.Core.ViewModels;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 using Xamarin.Forms;
@@ -40,7 +43,7 @@ namespace App.Template.XForms.Core.Views
                 _messenger.SubscribeOnMainThread<StartLoginMessage>(async x => await SignalStart());
 
             _loginSuccessSubscriptionToken =
-                _messenger.SubscribeOnMainThread<LoginSuccessMessage>(async x => await SignalSuccess());
+                _messenger.SubscribeOnMainThread<LoginSuccessMessage>(async x => await SignalSuccess(x.ActionToExecute));
 
             _loginFailureSubscriptionToken =
                 _messenger.SubscribeOnMainThread<LoginFailureMessage>(async x => await SignalFailure(x.ErrorMessage));
@@ -55,9 +58,10 @@ namespace App.Template.XForms.Core.Views
             base.OnDisappearing();
         }
 
-        private async Task SignalSuccess()
+        private async Task SignalSuccess(Action after)
         {
             await _authenticationBehaviour.SwitchAuthState(AuthenticationBehaviour.AuthState.Success);
+            after();
         }
 
         private async Task SignalFailure(string error)

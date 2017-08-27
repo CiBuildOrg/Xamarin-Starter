@@ -69,9 +69,6 @@ namespace App.Template.XForms.Core.ViewModels
             var validation = LoginModel.ValidateModel();
             if (validation.Success)
             {
-                await Task.Delay(6000);
-                // send message
-
                 var tokenResponse = await _authenticationService.GetAccessToken(LoginModel.UserName, LoginModel.Password, CancellationToken.None);
 
                 if (!tokenResponse.HasAccessToken)

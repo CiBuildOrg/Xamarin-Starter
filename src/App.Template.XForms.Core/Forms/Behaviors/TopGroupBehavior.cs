@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace App.Template.XForms.Core.Forms.Behaviors
@@ -38,15 +39,14 @@ namespace App.Template.XForms.Core.Forms.Behaviors
             TopIcon.Source = _heroImageDefault;
             TopIcon.TranslationY -= TopIcon.HeightRequest * 0.25;
 
-            Device.OnPlatform(Android: () =>
-                {
-                },
-                iOS: () =>
-                {
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
                     CloseIcon.TranslationY += 21;
                     Title.TranslationY += 21;
-                });
-
+                    break;
+            }
+            
             await Task.Delay(delay);
 
             await Task.WhenAll(

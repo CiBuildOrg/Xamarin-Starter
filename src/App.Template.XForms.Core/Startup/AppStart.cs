@@ -22,7 +22,7 @@ namespace App.Template.XForms.Core.Startup
 
         public void Start(object hint = null)
         {
-            if (_authenticationService.HasAlreadyRegistered(CancellationToken.None).WaitAsync().Result)
+            if (!_authenticationService.HasAlreadyRegistered(CancellationToken.None).WaitAsync().Result)
             {
                 ShowViewModel<LoginViewModel>();
             }

@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Template.XForms.Core.Models;
 using App.Template.XForms.Core.Models.Messages;
 using App.Template.XForms.Core.Resources;
+using App.Template.XForms.Core.ViewModels.Base;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 
 namespace App.Template.XForms.Core.ViewModels
 {
-    public class LoginViewModel : MvxViewModel
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    public class LoginViewModel : BasePageViewModel
     {
         private readonly IMvxMessenger _messenger;
 
-        public LoginViewModel(IMvxMessenger messenger)
+        public LoginViewModel(IMvxMessenger messenger, IMvxNavigationService navigationService)  : base(navigationService)
         {
             _messenger = messenger;
             LoginConfig = LoadConfiguration();
@@ -34,6 +34,8 @@ namespace App.Template.XForms.Core.ViewModels
 
         private AuthPageConfiguration _loginConfig;
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public AuthPageConfiguration LoginConfig
         {
             get => _loginConfig;
@@ -42,6 +44,7 @@ namespace App.Template.XForms.Core.ViewModels
 
         private LoginModel _loginModel;
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public LoginModel LoginModel
         {
             get => _loginModel;
@@ -49,10 +52,11 @@ namespace App.Template.XForms.Core.ViewModels
         }
 
         private IMvxCommand _submitCommand;
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public IMvxCommand SubmitCommand => _submitCommand ??
-                                            (_submitCommand = new MvxAsyncCommand(async () => await Submit())); 
+                                            (_submitCommand = new MvxAsyncCommand(async () => await Submit()));
 
-        public async Task Submit()
+        private async Task Submit()
         {
             _messenger.Publish(new StartLoginMessage(this));
 
@@ -68,16 +72,6 @@ namespace App.Template.XForms.Core.ViewModels
             {
                 _messenger.Publish(new LoginFailureMessage(this, validation.Failures.First().ErrorMessage));
             }
-        }
-        private static void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            var presentationBundle =
-                new MvxBundle(new Dictionary<string, string>
-                {
-                    {"NavigationMode", "ClearStack"}
-                });
-
-            Mvx.Resolve<IMvxNavigationService>().Navigate<TViewModel>(presentationBundle);
         }
 
         [SuppressMessage("ReSharper", "MemberCanBeMadeStatic.Global")]

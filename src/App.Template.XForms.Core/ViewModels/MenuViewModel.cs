@@ -1,20 +1,19 @@
 ﻿using App.Template.XForms.Core.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.ViewModels;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using App.Template.XForms.Core.Contracts;
+using App.Template.XForms.Core.ViewModels.Base;
 
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class MenuViewModel : MvxMasterDetailViewModel<HomeViewModel>
+    public class MenuViewModel : BaseMasterPageViewModel<HomeViewModel>
     {
         #region Fields
 
-        private readonly IMvxNavigationService _navigationService;
         private IEnumerable<MenuItem> _menu;
         private MenuItem _selectedMenuItem;
         private MvxCommand<MenuItem> _onSelectedMenuItemChangedCommand;
@@ -73,9 +72,8 @@ namespace App.Template.XForms.Core.ViewModels
 
         #endregion Properties
 
-        public MenuViewModel(IMvxNavigationService navigationService, IMenuService menuService)
+        public MenuViewModel(IMvxNavigationService navigationService, IMenuService menuService) : base(navigationService)
         {
-            _navigationService = navigationService;
             UserFullName = "Adam";
             UserEmail = "adam@noname.com";
             Menu = menuService.GetMenuItems();

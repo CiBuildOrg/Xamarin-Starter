@@ -1,10 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using MvvmCross.Core.ViewModels;
+using App.Template.XForms.Core.ViewModels.Base;
+using MvvmCross.Core.Navigation;
 
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class ScanBarcodeViewModel : MvxViewModel
+    public class ScanBarcodeViewModel : BasePageViewModel
     {
+        public ScanBarcodeViewModel(IMvxNavigationService navigationService) : base(navigationService)
+        {
+        }
     }
 }

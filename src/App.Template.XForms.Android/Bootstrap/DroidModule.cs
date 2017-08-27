@@ -1,5 +1,4 @@
-﻿using App.Template.XForms.Core.Contracts;
-using Autofac;
+﻿using Autofac;
 using Xamarin.Auth;
 
 namespace App.Template.XForms.Android.Bootstrap

@@ -1,34 +1,33 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using App.Template.XForms.Core.Utils.Interaction;
+using App.Template.XForms.Core.ViewModels.Base;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace App.Template.XForms.Core.ViewModels
 {
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class FirstViewModel : MvxViewModel
+    public class FirstViewModel : BasePageViewModel
     {
         private readonly IInteractiveAlerts _alerts;
         private static int _ctorCount;
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [SuppressMessage("ReSharper", "MemberCanBeMadeStatic.Global")]
         public int CtorCount => _ctorCount;
 
-        public FirstViewModel(IInteractiveAlerts alerts)
+        public FirstViewModel(IInteractiveAlerts alerts, IMvxNavigationService navigationService) : base(navigationService)
         {
             _alerts = alerts;
             _ctorCount++;
         }
 
         private MvxCommand _resetCounter;
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public MvxCommand ResetCounter => _resetCounter ?? (_resetCounter = new MvxCommand(ResetCounterImplementation));
-        public class AlertConfigItem
-        {
-            public string Title { get; set; }
 
-            public Action Command { get; set; }
-        }
 
-        protected void CreateAlertConfigItem(string title, string alertMessage, InteractiveAlertStyle style)
+        private void CreateAlertConfigItem(string title, string alertMessage, InteractiveAlertStyle style)
         {
             var alertConfig = new InteractiveAlertConfig
             {
@@ -42,7 +41,8 @@ namespace App.Template.XForms.Core.ViewModels
 
             _alerts.ShowAlert(alertConfig);
         }
-        public void ResetCounterImplementation()
+
+        private void ResetCounterImplementation()
         {
             _ctorCount = 0;
             RaisePropertyChanged(nameof(CtorCount));

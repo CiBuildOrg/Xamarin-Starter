@@ -66,17 +66,6 @@ namespace App.Template.XForms.Android
             _lifetimeListener.OnCreate(this);
         }
 
-        private static void ClearStackAndShowViewModel<TViewModel>() where TViewModel : IMvxViewModel
-        {
-            var presentationBundle =
-                new MvxBundle(new Dictionary<string, string>
-                {
-                    {"NavigationMode", "ClearStack"}
-                });
-
-            Mvx.Resolve<IMvxNavigationService>().Navigate<TViewModel>(presentationBundle);
-        }
-
         protected override void OnDestroy()
         {
             _lifetimeListener.OnDestroy(this);
